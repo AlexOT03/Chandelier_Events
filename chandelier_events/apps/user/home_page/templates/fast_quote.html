@@ -1,0 +1,33 @@
+{% extends 'base/base_user.html' %}
+{% load static %}{% load crispy_forms_tags %}
+
+{% block title %}Cotizacion Rapida{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="section-header bg-primary text-white pt-6 pb-4">
+    <div class="container">
+      <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h1 class="display-3 fw-normal my-4">
+                  ¡Encuentra la inspiración que estás buscando, déjanos sorprenderte con opciones únicas y emocionantes para tu
+                  próximo gran evento!
+                </h1>
+            </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-sm bg-primary-app">
+    <div class="container mt-5">
+        <h1>Cotización Rapida</h1>
+        <h5>Tiene en mente algo pero no sabe que hacer?, no se preocupe para eso estamos!</h5>
+        <form method="post">
+            {{ form_quote|crispy }}
+            <button type="submit" class="btn btn-primary">
+                Enviar
+            </button>
+        </form>
+    </div>
+  </section>
+{% endblock %}

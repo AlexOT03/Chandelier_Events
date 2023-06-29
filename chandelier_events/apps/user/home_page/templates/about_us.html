@@ -1,0 +1,88 @@
+{% extends 'base/base_user.html' %}
+{% load static %}{% load crispy_forms_tags %}
+
+{% block title %}Nosotros{% endblock %}
+
+{% block content %}
+<section class="section-header bg-primary text-white pt-6 pb-4"></section>
+
+<section class="section section-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Acerca de nosotros</h2>
+                <p>Somos un equipo apasionado de profesionales dedicados a hacer realidad tus sueños. Con años de
+                    experiencia en la industria de eventos, nos especializamos en ayudarte a planificar y organizar
+                    eventos
+                    inolvidables que superen tus expectativas.</p>
+                <p>Ya sea que estés planeando una boda, una fiesta de cumpleaños o cualquier otro tipo de evento,
+                    nuestro
+                    objetivo es brindarte un servicio excepcional, atención personalizada y soluciones creativas que
+                    hagan de
+                    tu evento algo único y especial.</p>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'img/office.png' %}" alt="Imagen de equipo" class="img-fluid">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Misión</h3>
+                <p>Proin volutpat eleifend orci, at congue enim accumsan vel. Sed non faucibus nunc. Maecenas sed sapien
+                    aliquet, efficitur sapien non, ullamcorper ligula. Curabitur in ex quis dui lacinia lobortis. Nullam
+                    volutpat lacus id diam convallis facilisis.</p>
+            </div>
+            <div class="col-md-6">
+                <h3>Visión</h3>
+                <p>Nullam sagittis metus sed justo lacinia auctor. Vivamus et purus volutpat, tempor elit id, pharetra
+                    risus. Sed non felis pulvinar, tristique nisl eu, suscipit mi. Fusce iaculis nibh a leo egestas, vel
+                    efficitur massa tincidunt.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2>Nuestro equipo</h2>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
+                <div class="card border-0 text-center">
+                    <div class="card-header border-0 bg-white">
+                        <img src="{% static 'img/team/profile-picture-2.jpg' %}" class="card-img-top rounded shadow border-0" alt="Christopher Avatar">
+                    </div>
+                    <div class="card-body">
+                        <span class="card-subtitle text-gray fw-normal">Sales</span>
+                        <h3 class="h4 card-title mt-2">Christopher Wood</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
+                <div class="card border-0 text-center">
+                    <div class="card-header border-0 bg-white">
+                        <img src="{% static 'img/team/profile-picture-3.jpg' %}" class="card-img-top rounded shadow border-0" alt="Bonnie Avatar">
+                    </div>
+                    <div class="card-body">
+                        <span class="card-subtitle text-gray fw-normal">Marketing</span>
+                        <h3 class="h4 card-title mt-2">Bonnie Green</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card border-0 text-center">
+                    <div class="card-header border-0 bg-white">
+                        <img src="{% static 'img/team/profile-picture-4.jpg' %}" class="card-img-top rounded shadow border-0" alt="Neil Avatar">
+                    </div>
+                    <div class="card-body">
+                        <span class="card-subtitle text-gray fw-normal">Invoice</span>
+                        <h3 class="h4 card-title mt-2">Neil Sims</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

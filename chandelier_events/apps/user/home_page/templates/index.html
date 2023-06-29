@@ -1,0 +1,364 @@
+{% extends 'base/base_user.html' %}
+{% load static %}{% load crispy_forms_tags %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-7 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="bootstrap-big-icon d-none d-lg-block">
+                    <img src="{% static 'img/logo/chandelier-512-logo.png' %}" alt="" width="700" height="622" class="d-block my-1 colored-image-white">
+                </div>
+                <h1 class="fw-bolder display-2">CHANDELIER</h1>
+                <h2 class="lead fw-normal text-muted mb-4 px-lg-10">
+                    ¡Descubre un mundo de lugares extraordinarios!
+                    <br>
+                    Celebra momentos inolvidables con nosotros.
+                </h2>
+                <div class="d-flex justify-content-center align-items-center mb-5">
+                    <a href="#services" class="btn btn-tertiary mb-3 mt-2 me-2 me-md-3 animate-up-2">
+                        <span class="fa-solid fa-bell-concierge me-2"></span>
+                        <span class="d-none d-md-inline">Explorar servicios</span>
+                        <span class="d-md-none">Servicios</span>
+                    </a>
+                    <a href="#get-start" class="btn btn-tertiary mb-3 mt-2 me-2 me-md-3 animate-up-2">
+                        <span class="fa-solid fa-location-dot me-2"></span>
+                        <span class="d-none d-md-inline">Explorar Ubicaciones</span>
+                        <span class="d-md-none">Ubicaciones</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <figure class="position-absolute bottom-0 left-0 w-100 d-none d-md-block mb-n2">
+        <svg class="fill-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+            <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
+        </svg>
+    </figure>
+</section>
+
+<section class="section section-sm" id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="section-title">Nuestro servicios</h3>
+                <div class="section-title-divider"></div>
+                <p class="section-description">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus qui
+                    blanditiis praesentium
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-6 service-item">
+                <h4 class="service-title">Cotizacion personalizada</h4>
+                <p class="service-description">
+                    Con nuestro sitio web, puedes ingresar los detalles de tu evento, con esta informacion, se te
+                    proporcionará una cotización personalizada basada en los precios y servicios de los proveedores de
+                    lugares asociados.
+                </p>
+            </div>
+            <div class="col-lg-4 col-md-6 service-item">
+                <h4 class="service-title">Busqueda y visualizacion de lugares</h4>
+                <p class="service-description">
+                    Minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat tarad limino ata
+                </p>
+            </div>
+            <div class="col-lg-4 col-md-6 service-item">
+                <h4 class="service-title">Sed ut perspiciatis</h4>
+                <p class="service-description">
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                    dolore eu fugiat nulla pariatur
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-sm" id="get-start">
+    <div class="container">
+        <div class="row pb-4">
+            <h2 class="">Ubicaciones para eventos por Estados</h2>
+            <h6 class="">Seleccione uno para empezar a explorar.</h6>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="scrollview-wrapper-x">
+                    {% for estado in estados %}
+                    <div class="scrollview-item text-center">
+                        <a href="#">
+                            <img src="{{ estado.images.url}}" class="img-fluid rounded-circle"
+                                alt="Imagen 1">
+                            <h3 class="text text-center m-3">{{ estado.name }}</h3>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-sm">
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center">¡Sumérgete en una experiencia única y participa en nuestros eventos online!</h2>
+            <p class="lead text-center">Encuentra la categoría perfecta para ti: Eventos pequeños, medianos o grandes.
+                ¡Te ofrecemos una amplia variedad de opciones para satisfacer tus necesidades y presupuesto!
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
+                <div class="card shadow-sm shadow-lg-hover text-center animate-up-3">
+                    <div class="card-header bg-white p-3">
+                        <h3 class="text-primary mb-4">Pequeños</h3>
+                        <span class="d-block">
+                            <span class="d-block text-gray font-small">desde /</span>
+                            <span class="display-1 text-dark fw-bold">
+                                <span class="align-top font-medium">$</span>10,000
+                            </span>
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-4">
+                            <li class="list-item pb-3">Asistencia limitada y de menor escala</li>
+                            <li class="list-item pb-3">Precios más asequibles para presupuestos bajos</li>
+                            <li class="list-item pb-3">Incluye seminarios web, conferencias en línea o talleres
+                                virtuales</li>
+                            <li class="list-item pb-3">Precios variables según duración, número de participantes y
+                                características adicionales</li>
+                        </ul>
+                        <div class="d-grid">
+                            <a href="#" class="btn btn-primary mb-3 mt-2 me-2 me-md-3 animate-down-2">
+                                <span class="fa-solid fa-basket-shopping me-2"></span>
+                                <span class="d-none d-md-inline">Comprar ahora</span>
+                                <span class="d-md-none">Comprar</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
+                <div class="card shadow-sm shadow-lg-hover text-center animate-up-3">
+                    <div class="card-header bg-white p-3">
+                        <h3 class="text-primary mb-4">Medianos</h3>
+                        <span class="d-block">
+                            <span class="d-block text-gray font-small">desde /</span>
+                            <span class="display-1 text-dark fw-bold">
+                                <span class="align-top font-medium">$</span>50,000
+                            </span>
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-4">
+                            <li class="list-item pb-3">Tamaño moderado, conferencias más grandes, simposios o
+                                presentaciones de productos</li>
+                            <li class="list-item pb-3">Precios ligeramente más altos que eventos pequeños</li>
+                            <li class="list-item pb-3">Requiere infraestructura técnica más sofisticada y mayor
+                                capacidad de participantes</li>
+                            <li class="list-item pb-3">Posibilidad de ofrecer paquetes personalizados según necesidades
+                                del cliente</li>
+                        </ul>
+                        <div class="d-grid">
+                            <a href="#" class="btn btn-primary mb-3 mt-2 me-2 me-md-3 animate-down-2">
+                                <span class="fa-solid fa-basket-shopping me-2"></span>
+                                <span class="d-none d-md-inline">Comprar ahora</span>
+                                <span class="d-md-none">Comprar</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
+                <div class="card shadow-sm shadow-lg-hover text-center animate-up-3">
+                    <div class="card-header bg-white p-3">
+                        <h3 class="text-primary mb-4">Grandes</h3>
+                        <span class="d-block">
+                            <span class="d-block text-gray font-small">desde /</span>
+                            <span class="display-1 text-dark fw-bold">
+                                <span class="align-top font-medium">$</span>90,000
+                            </span>
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-4">
+                            <li class="list-item pb-3">Gran envergadura, como ferias comerciales virtuales, conciertos
+                                en línea o convenciones virtuales</li>
+                            <li class="list-item pb-3">Precios considerablemente más altos debido a la complejidad y
+                                alcance</li>
+                            <li class="list-item pb-3">Variedad de paquetes con servicios adicionales como diseño
+                                personalizado, soporte técnico dedicado, transmisión en alta calidad, servicios de
+                                traducción y funciones interactivas avanzadas</li>
+                            <li class="list-item pb-3">Precios reflejan la demanda, cantidad de participantes y
+                                características adicionales</li>
+                        </ul>
+                        <div class="d-grid">
+                            <a href="#" class="btn btn-primary mb-3 mt-2 me-2 me-md-3 animate-down-2">
+                                <span class="fa-solid fa-basket-shopping me-2"></span>
+                                <span class="d-none d-md-inline">Comprar ahora</span>
+                                <span class="d-md-none">Comprar</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-sm">
+    <div class="container">
+        <h2>Descubra todas las ubicaciones que Chandelier tiene para ofrecer!</h2>
+        <div class="album">
+            <div class="pt-4 pb-4">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+                    {% for location in locations %}
+                    <div class="col">
+                        <div class="card shadow-hover">
+                            <img src="{{ location.images.url}}" class="card-img-top" alt="{{ location.images }}" />
+                            <div class="card-body">
+                                <h5 class="card-title">{{ location.name }}</h5>
+                                <p class="card-subtitle">{{ location.location }}</p>
+                                <div class="card-text">
+                                    <strong>Tematica</strong> | 
+                                    <small>{{ location.theme }}</small>
+                                </div>
+                                <p class="card-text">
+                                    <strong>$</strong> <small>{{ location.price }}</small> | <span
+                                        class="fas fa-user-circle"></span> <small>{{ location.capacity }}</small>
+                                </p>
+                                <a href="#" class="btn btn-primary animate-up-2">Mas informacion</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <a href="#" class="btn btn-outline-primary">Ver las {{ locations.count }} ubicaciones <span class="fa-solid fa-arrow-right"></span></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-sm">
+    <div class="container">
+        <div class="row">
+            <h3>Consejos para elegir la mejor locación para su evento</h3>
+        </div>
+        <div class="row">
+            <ul>
+                <li>Una locación adaptada al estilo del evento. ¿Desean un evento al aire libre? ¿Prefieren festejar en
+                    un salón sobrio y elegante? ¿Organizan un evento con vistas al mar y buscan un lugar más
+                    desenfadado? Sea cual sea la locación elegida, debe ser un lugar que los emocione y con el que
+                    sientan una conexión especial desde el primer momento que lo visiten.
+                </li>
+                <li>Realicen la reserva con anticipación suficiente. Hay locaciones con una alta demanda, por lo tanto,
+                    se recomienda que una vez decidan la fecha adecuada, hagan la reserva lo antes posible, idealmente
+                    con unos 12 meses de anticipación.
+                </li>
+                <li>Consulten la capacidad del lugar. Tanto si tienen un evento íntimo como si celebran un gran
+                    acontecimiento, asegúrense de que el lugar cumple con los aforos y espacios necesarios para su
+                    fiesta.
+                </li>
+                <li>Soliciten un presupuesto que incluya todos los servicios que deseen incorporar en su evento.
+                    Pregunten si el paquete incluye servicios como decoración, mantelería, cristalería especial,
+                    iluminación o pista de baile, por ejemplo. Los pequeños detalles son muy importantes, especialmente
+                    en uno de los días más importantes de sus vidas.
+                </li>
+                <li>Infórmense sobre los métodos de pago y cuándo deben realizarse, así como el porcentaje de anticipo o
+                    el costo de la reserva del lugar.
+                </li>
+                <li>Presten atención al trato recibido al contactar con el lugar y su flexibilidad ante posibles
+                    imprevistos. Consultar las opiniones que dejaron otras personas en el portal sobre los servicios
+                    recibidos les será de mucha utilidad para tomar una buena decisión.
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="section section-sm">
+    <div class="container py-5">
+        <h2 class="text-center mb-4">Preguntas Frecuentes</h2>
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="question1">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#answer1"
+                        aria-expanded="true" aria-controls="answer1">
+                        ¿Cuánto tiempo de anticipación se debe reservar un lugar para un evento social?
+                    </button>
+                </h3>
+                <div id="answer1" class="accordion-collapse collapse show" aria-labelledby="question1"
+                    data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Se recomienda reservar un lugar para un evento social con al menos 6 meses de anticipación. Sin
+                        embargo, en caso de eventos más grandes o en temporadas altas, es recomendable hacerlo con mayor
+                        antelación.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="question2">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#answer2" aria-expanded="false" aria-controls="answer2">
+                        ¿Qué opciones de catering ofrecen para eventos sociales?
+                    </button>
+                </h3>
+                <div id="answer2" class="accordion-collapse collapse" aria-labelledby="question2"
+                    data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Ofrecemos una amplia variedad de opciones de catering para eventos sociales, que incluyen menús
+                        personalizados, buffets temáticos, estaciones de comida, opciones vegetarianas y veganas, entre
+                        otras. Nos adaptamos a las necesidades y preferencias de nuestros clientes.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="question3">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#answer3" aria-expanded="false" aria-controls="answer3">
+                        ¿Cuáles son las opciones de entretenimiento disponibles para eventos sociales?
+                    </button>
+                </h3>
+                <div id="answer3" class="accordion-collapse collapse" aria-labelledby="question3"
+                    data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Para eventos sociales, ofrecemos una variedad de opciones de entretenimiento, como DJ en vivo,
+                        bandas musicales, shows en vivo, pistas de baile, juegos interactivos, fotomatones, entre otros.
+                        Adaptamos el entretenimiento a la temática y estilo del evento.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-sm">
+    <div class="container">
+        <div class="row">
+            <h2>Total de ubicaciones para eventos.</h2>
+        </div>
+        <div class="row">
+            <ul class="">
+                {% for estado in estados %}
+                <li class="p-2 d-flex justify-content-between shadow-hover">
+                    <a href="">{{ estado.name }}</a>
+                    <small>
+                        {{ locations.all.count }}
+                    </small>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}

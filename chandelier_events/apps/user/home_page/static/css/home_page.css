@@ -1,0 +1,27 @@
+.scrollview-wrapper-x {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    /* Oculta la barra de desplazamiento del navegador */
+    -ms-overflow-style: none;
+    /* Oculta la barra de desplazamiento en Internet Explorer y Microsoft Edge */
+  }
+  
+  .scrollview-item {
+    flex: 0 0 auto;
+    width: 180px;
+    height: auto;
+    margin-right: 20px;
+    scroll-snap-align: start;
+  }
+  
+.colored-image-white {
+  filter: invert(100%);
+}
+  
+#back-to-top {
+  transition: 0.5s;
+  opacity: 0.8;
+}

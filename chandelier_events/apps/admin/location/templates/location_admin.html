@@ -1,0 +1,83 @@
+{% extends 'base/base_admin.html' %}
+{% load static %}{% load crispy_forms_tags %}
+
+{% block title %}Ubicaciones{% endblock %}
+
+{% block content %}
+<div class="row">
+    <nav aria-label="breadcrumb" class="ml-3">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Tablero</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Ubicaciones</li>
+        </ol>
+    </nav>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h2>Nueva Ubicacion</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <label for="images"><h6><strong>Imagenes</strong></h6></label>
+                    <div class="mb-3" id="images">
+                        {{ form_images.management_form }}
+                        {% for form_image in form_images %}
+                            <div>
+                                {{ form_image|crispy }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <label for="open-hours"><h6><strong>Horario</strong></h6></label>
+                    <div class="scrollview-wrapper-x mb-3" id="open-hours">
+                        {{ form_hours.management_form }}
+                        {% for form_hour in form_hours %}
+                            <div class="scrollview-item-sm">
+                                {{ form_hour|crispy }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Registrar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h2>Ubicaciones</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Imagen</th>
+                                <th colspan="3">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Imagen</th>
+                                <th colspan="3">Opciones</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

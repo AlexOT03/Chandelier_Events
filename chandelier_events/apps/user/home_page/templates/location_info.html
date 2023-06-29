@@ -1,0 +1,148 @@
+{% extends 'base/base_user.html' %}
+{% load static %}{% load crispy_forms_tags %}
+
+{% block title %}{{ location.name }}{% endblock %}
+
+{% block content %}
+<section class="section-header overflow-hidden pt-5 pb-5 bg-primary text-white"></section>
+
+<section class="section section-sm">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div id="carouselExample" class="carousel slide">
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img src="{{ location.images.url }}" class="d-block w-100" alt="...">
+                              </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <h2>{{ location.name }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            &nbsp; <b>5.0</b>
+                        </p>
+                        <p class="card-text"><a href="#"><i class="fa-solid fa-location-dot"></i>&nbsp; {{ location.location }}</a></p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item ms-2"><i class="fa-solid fa-flag"></i>&nbsp; Estado: {{ location.state }}</li>
+                        <li class="list-group-item ms-2"><i class="fa-solid fa-gift"></i>&nbsp; Tematica( <small class="cursor-pointer" data-bs-toggle="tooltip" data-bs-title="Esto no quiere decir que no se pueda usar para otro tipos de eventos sociales."><i>Opcional</i></small> ): {{ location.theme }}</li>
+                    </ul>
+                    <div class="card-footer">
+                        <a href="" class="btn btn-secondary-app animate-down-1 shadow-hover">Cotizar ahora!</a>
+                        <a href="" class="btn btn-outline-secondary-app animate-down-1 shadow-hover">
+                            <i class="fa-solid fa-phone"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <h4>Detalles importantes</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row align-items-center text-center">
+                            <div class="col p-4"><i class="fa-solid fa-users-rectangle fa-xl"></i>&nbsp; <span data-bs-toggle="tooltip" data-bs-title="Puede variar dependiendo del tamaño o del distribuidor, este es un numero aproximado.">Hasta {{ location.capacity }} personas</span></div>
+                            <div class="col p-4"><i class="fa-solid fa-money-bill fa-xl"></i>&nbsp; <span data-bs-toggle="tooltip" data-bs-title="Coste de renta de la ubicacion, los servicios y demas pueden aumentar el precio.">Desde ${{ location.price }}</span></div>
+                            <div class="col p-4"><i class="fa-solid fa-gift fa-xl"></i>&nbsp; <span data-bs-toggle="tooltip" data-bs-title="Esto no quiere decir que no se pueda usar para otro tipos de eventos sociales.">Para eventos tipo  "{{ location.theme }}"</span></div>
+                        </div>
+                        <div class="row align-items-center text-center">
+                            <div class="col p-4"><i class="fa-solid fa-square-parking fa-xl"></i>&nbsp; <span data-bs-toggle="tooltip" data-bs-title="Consulte con el distribuidor la disponivilidad del mismo.">Con estacionamiento</span></div>
+                            <div class="col p-4"><i class="fa-solid fa-user fa-xl"></i>&nbsp; <span>Dueño {{ location.owner }}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <h4>Informacion</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex flex-row mb-3">
+                            <div class="pe-4"><small>En Chandelier desde: {{ location.created_date }}</small></div>
+                            <div class="pe-4"><small>Ultima actualizacion: {{ location.created_date }}</small></div>
+                        </div>
+                        <h6 class="card-title">Descripcion</h6>
+                        <p class="card-text">
+                            {{ location.description }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <h4>Horarios Laborales</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Dia</th>
+                                    <th>Apertura</th>
+                                    <th>Cierre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for hour in opening_hours %}
+                                    <tr>
+                                        <td>{{ hour.get_day_of_week_display }}</td>
+                                        <td>{{ hour.opening_time }}</td>
+                                        <td>{{ hour.closing_time }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <h4>Detalles Tecnicos</h4>
+                    </div>
+                    <div class="card-body">
+                        El terreno tiene una superficie de <strong>m²</strong>, 
+                        con unas dimensiones de <strong>{{location.location_length|floatformat:2}}m de largo</strong> por <strong>{{ location.location_width|floatformat:2 }}m de ancho.</strong>
+                        {% if location.location_length != location.location_width %}
+                        <img src="{% static 'img/terrain/rectangulo.png' %}" class="mx-auto d-block" alt="Terreno rectangular"/>
+                        {% else %}
+                        <img src="{% static 'img/terrain/cuadrado.png' %}" class="mx-auto d-block" alt="Terreno cuadrado"/>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

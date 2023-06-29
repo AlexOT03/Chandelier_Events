@@ -1,0 +1,25 @@
+{% extends 'base/base_user.html' %}
+{% load static %}{% load crispy_forms_tags %}
+
+{% block title %}Cotizacion{% endblock %}
+
+{% block content %}
+<section class="section-header bg-primary text-white pt-6 pb-4"></section>
+
+<section class="section section-sm">
+    <div class="container">
+        <div class="card shadow">
+            <div class="card-body">
+                <h2 class="text-center mb-5">Ayúdanos a llenar el siguiente formulario.</h2>
+
+        <form action="#" method="POST">
+            
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Enviar Cotización</button>
+            </div>
+        </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

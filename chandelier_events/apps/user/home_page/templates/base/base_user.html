@@ -1,0 +1,206 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chandelier | {% block title %}{% endblock %}</title>
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'img/favicon/apple-touch-icon.png' %}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo/chandelier-64-logo.png' %}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/logo/chandelier-64-logo.png' %}" />
+    <!-- Fontawesome -->
+    <link type="text/css" href="{% static 'vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Pixel CSS -->
+    <link type="text/css" href="{% static 'css/pixel.css' %}" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="{% static 'css/css_bootstrap.min.css' %}"> -->
+    <!-- Personal CSS -->
+    <link rel="stylesheet" href="{% static 'css/home_page.css' %}">
+</head>
+
+<body>
+    <header class="header-global">
+        <nav id="navbar-main" aria-label="Primary navigation"
+            class="navbar navbar-main navbar-expand-lg navbar-theme-primary headroom navbar-dark">
+            <div class="container position-relative">
+                <a class="navbar-brand me-lg-5" href="#">
+                    <img class="navbar-brand-dark colored-image-white" src="{% static 'img/logo/chandelier-64-logo.png' %}"
+                        alt="Logo light" />
+                    <img class="navbar-brand-light" src="{% static 'img/logo/chandelier-64-logo.png' %}" alt="Logo dark" />
+                </a>
+                <div class="navbar-collapse collapse me-auto" id="navbar_global">
+                    <div class="navbar-collapse-header">
+                        <div class="row">
+                            <div class="col-6 collapse-brand">
+                                <a href="#">
+                                    <img src="{% static 'img/logo/chandelier-64-logo.png' %}" alt="Chandelier Logo" />
+                                </a>
+                            </div>
+                            <div class="col-6 collapse-close">
+                                <a href="#navbar_global" class="fas fa-times" data-bs-toggle="collapse"
+                                    data-bs-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false"
+                                    title="close" aria-label="Toggle navigation"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'home_user' %}">Inicio</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="componentsDropdown" aria-expanded="false" data-bs-toggle="dropdown">
+                                Ubicaciones
+                                <span class="fas fa-angle-down nav-link-arrow ms-1"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-megamenu-sm p-0" aria-labelledby="componentsDropdown">
+                                <div class="row g-0">
+                                    <div class="col-lg-4 d-none d-lg-block me-0 me-3 border-end">
+                                        <div class="px-0 py-3 text-center">
+                                            <h5>Ubicaciones</h5>
+                                            <P class="p-2"><small>Selecciona una ubicación según la temática o el estado que le atraiga.</small></p>
+                                            <img src="{% static 'img/logo/chandelier-64-logo.png' %}" alt="Logo Chandelier">
+                                        </div>
+                                    </div>
+                                    <div class="col ps-0 py-3">
+                                        <h6 class="d-block mb-3 text-primary">Tematicas</h6>
+                                        <ul class="list-style-none mb-4">
+                                            {% for theme in themes %}
+                                                <li class="mb-2 megamenu-item">
+                                                    <a class="megamenu-link" href="{% url 'location_user' %}">{{ theme.name }}</a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div class="col ps-0 py-3 me-2">
+                                        <h6 class="d-block mb-3 text-primary">Estados</h6>
+                                        <ul class="list-style-none">
+                                            {% for state in states %}
+                                                <li class="mb-2 megamenu-item">
+                                                    <a class="megamenu-link" href="{% url 'location_user' %}">{{ state.name }}</a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'about_user' %}">Acerca de</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'message_user' %}">Contactanos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">Ingresar</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="footer pt-6 pb-5 bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="navbar-brand-dark mb-4 colored-image-white" height="35"
+                        src="{% static 'img/logo/chandelier-64-logo.png' %}" alt="Logo light" />
+                    <p>
+                        Pixel is a free and open source Bootstrap 5 UI Kit that will help
+                        you prototype and build beautiful website pages and applications.
+                    </p>
+                    <ul class="social-buttons mb-5 mb-lg-0">
+                        <li>
+                            <a href="https://twitter.com/" aria-label="twitter social link" class="icon-white me-2">
+                                <span class="fab fa-twitter"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/" class="icon-white me-2"
+                                aria-label="facebook social link">
+                                <span class="fab fa-facebook"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://dribbble.com/" class="icon-white" aria-label="dribbble social link">
+                                <span class="fab fa-dribbble"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-4 mb-5 mb-lg-0">
+                    <span class="h5">Subscribe</span>
+                    <p class="text-muted font-small mt-2">
+                        Join our mailing list. We write rarely, but only the best content.
+                    </p>
+                    <form action="#">
+                        <div class="form-row mb-2">
+                            <div class="col-12">
+                                <label class="h6 fw-normal text-muted d-none" for="exampleInputEmail3">Email
+                                    address</label>
+                                <input type="email" class="form-control mb-2" placeholder="example@company.com"
+                                    name="email" aria-label="Subscribe form" id="exampleInputEmail3" required />
+                            </div>
+                            <div class="col-12 d-grid">
+                                <button type="submit" class="btn btn-tertiary" data-loading-text="Sending">
+                                    <span>Subscribe</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <p class="text-muted font-small m-0">
+                        We’ll never share your details. See our
+                        <a class="text-white" href="#">Privacy Policy</a>
+                    </p>
+                </div>
+            </div>
+            <hr class="bg-secondary my-3 my-lg-5" />
+            <div class="row">
+                <div class="col mb-md-0">
+                    <a href="#" target="_blank" class="d-flex justify-content-center mb-3">
+                        <p class="text-white fw-bold footer-logo-text m-0">MasTecnologia</p>
+                    </a>
+                    <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo">
+                        <p class="fw-normal font-small mb-0">
+                            Copyright © MasTech 2019-<span class="current-year">2021</span>.
+                            All rights reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <button class="btn btn-primary position-fixed bottom-0 end-0 m-3" id="back-to-top" style="display: none;">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+    <!-- Core -->
+    <script src="{% static 'vendor/@popperjs/core/dist/umd/popper.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendor/headroom.js/dist/headroom.min.js' %}"></script>
+    <!-- Vendor JS -->
+    <script src="{% static 'vendor/onscreen/dist/on-screen.umd.min.js' %}"></script>
+    <script src="{% static 'vendor/jarallax/dist/jarallax.min.js' %}"></script>
+    <script src="{% static 'vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js' %}"></script>
+    <script src="{% static 'vendor/vivus/dist/vivus.min.js' %}"></script>
+    <script src="{% static 'vendor/vanillajs-datepicker/dist/js/datepicker.min.js' %}"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Pixel JS -->
+    <script src="{% static 'js/pixel.js' %}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'js/js_bootstrap.bundle.min.js' %}"></script>
+    <!-- personal JS -->
+    <script src="{% static 'js/home_page.js' %}"></script>
+</body>
+
+</html>

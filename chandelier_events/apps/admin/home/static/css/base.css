@@ -1,0 +1,95 @@
+/* desactivat objetos */
+.disable {
+  pointer-events: none;
+}
+
+/* Diseño para scroll lateral */
+.scrollview-wrapper-x {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollview-item-sm {
+  flex: 0 0 auto;
+  width: 115px;
+  height: auto;
+  margin: 5px 10px;
+}
+
+.scrollview-item-md {
+  flex: 0 0 auto;
+  width: 245px;
+  height: auto;
+  margin: 0 10px 0;
+}
+
+.scrollview-item-lg {
+  flex: 0 0 auto;
+  width: 315px;
+  height: auto;
+  margin: 5px 10px 5px 0;
+}
+
+.scrollview-item-xl {
+  flex: 0 0 auto;
+  width: 415px;
+  height: auto;
+  margin: 5px 10px 5px 0;
+}
+
+/* etiqueta tipo boostrap para cards */
+.text-bg-blue {
+  background: linear-gradient(to right, #415abc, #5fbae7);
+  color: white;
+}
+
+.text-bg-purple {
+  background: linear-gradient(to right, #5931c7, #ac43db);
+  color: white;
+}
+
+.text-bg-orange {
+  background: linear-gradient(to right, #ea7d63, #f1bf3c);
+  color: white;
+}
+
+.text-bg-red {
+  background: linear-gradient(to right, #bc2b63, #f34c55);
+  color: white;
+}
+
+/* Cambiar color a objetos */
+.colored-image-white {
+  filter: invert(100%);
+}
+
+/* cambiar tamaño a objeto */
+.sm-obj-x40-y40 {
+  width: 40px;
+  height: 40px;
+}
+
+.img-sm {
+  width: 100px;
+  height: auto;
+}
+
+/* poner el cursor en modo puntero */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.bg-custom-p {
+  background: #2A354F;
+}
+
+/* hover para card */
+.hover:hover {
+  background-color: #e3e3e3;
+  /* color: white; */
+  transition: 0.2s;
+}

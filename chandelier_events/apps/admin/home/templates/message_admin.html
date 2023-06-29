@@ -1,0 +1,42 @@
+{% extends 'base/base_admin.html' %}
+{% load static %}{% load crispy_forms_tags %}
+
+{% block title %}Mensajes{% endblock %}
+
+{% block content %}
+<div class="row">
+    <nav aria-label="breadcrumb" class="ml-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Tablero</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Mensajes</li>
+        </ol>
+    </nav>
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h2>Bandeja de Entrada</h2>
+            </div>
+            <div class="container p-3">
+                {% for message in messages %}
+                    <div class="card mb-3 border-left-primary">
+                        <a href="#" class="hover text-decoration-none text-gray-600">
+                            <div class="row g-0 justify-content-between">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-0">{{ message.name }}</h5>
+                                        <p class="card-text mt-0">{{ message.affair|upper }}</p>
+                                        <p class="card-text"><small>{{ message.message|slice:":30" }}...</small></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 d-flex align-items-center justify-content-center">
+                                    <p class="card-text text-center"><small>{{ message.date|date:"d/m/Y" }}</small></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
