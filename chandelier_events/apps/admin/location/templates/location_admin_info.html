@@ -4,5 +4,173 @@
 {% block title %}{{ location.name }}{% endblock %}
 
 {% block content %}
-
+<div class="row">
+    <nav aria-label="breadcrumb" class="ml-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home_admin' %}">Tablero</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'location_admin' %}">Ubicaciones</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Informacion</li>
+        </ol>
+    </nav>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h2>Informacion sobre: {{ location.name }}</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <h6><b>Imagenes</b></h6>
+                        {% for image in images %}
+                            {% if image.image %}
+                                <img src="{{ image.image.url }}" class="img-fluid img-thumbnail" alt="{{ image.image }}">
+                            {% else %}
+                                <p>No hay imagen disponible</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="table-responsive">
+                            <table class="table border">
+                                <tbody>
+                                    <tr>
+                                        <th>ID</th>
+                                        <td>{{ location.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <td>{{ location.name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ubicacion</th>
+                                        <td>{{ location.location }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mapa</th>
+                                        <td>
+                                            {{ location.location_url }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Alto</th>
+                                        <td>{{ location.length }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ancho</th>
+                                        <td>{{ location.width }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Dueño</th>
+                                        <td>{{ location.owner }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Correo</th>
+                                        <td>{{ location.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Telefono</th>
+                                        <td>{{ location.phone }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Cupo</th>
+                                        <td>{{ location.capacity }} personas</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Precio</th>
+                                        <td>${{ location.price }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Estado</th>
+                                        <td>{{ location.state }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tematica</th>
+                                        <td>{{ location.theme }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Sitio Web</th>
+                                        <td>{{ location.web_site }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fecha de registro</th>
+                                        <td>{{ location.created_date }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fecha de actualizacion</th>
+                                        <td>{{ location.updated_date }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Estado</th>
+                                        <td>
+                                            {% if location.is_active == True %}
+                                                <div class="bg-success text-white">
+                                                    <p class="p-2">Activo</p>
+                                                </div>
+                                            {% else %}
+                                                <div class="bg-danger text-white">
+                                                    <p class="p-2">Inactivo</p>
+                                                </div>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Estacionamiento</th>
+                                        <td>
+                                            {% if location.parking == True %}
+                                                <div class="bg-success text-white">
+                                                    <p class="p-2">Disponible</p>
+                                                </div>
+                                            {% else %}
+                                                <div class="bg-danger text-white">
+                                                    <p class="p-2">No Disponible</p>
+                                                </div>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Descripcion</th>
+                                        <td>{{ location.description }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <h2>Horarios Laborales</h2>
+                        <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>Día</th>
+                                <th>Hora de Apertura</th>
+                                <th>Hora de Cierre</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% for hours in opening_hours %}
+                                    <tr>
+                                        <td>{{ hours.get_day_of_week_display }}</td>
+                                        <td>{{ hours.opening_time }}</td>
+                                        <td>{{ hours.closing_time }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'location_admin' %}" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </span>
+                    <span class="text">Regresar</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -30,8 +30,8 @@ class Image(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='location_images', blank=True, null=True)
 
-    def __str__(self):
-        return str(self.image)
+    # def __str__(self):
+    #     return str(self.image)
 
 class OpeningHour(models.Model):
     WEEKDAYS = (
@@ -48,5 +48,5 @@ class OpeningHour(models.Model):
     opening_time = models.TimeField(blank=True, null=True)
     closing_time = models.TimeField(blank=True, null=True)
 
-    def __str__(self):
-        return self.day_of_week
+    # def __str__(self):
+    #     return self.day_of_week

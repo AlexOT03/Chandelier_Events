@@ -19,7 +19,7 @@
             </div>
             <div class="card-body">
                 <label for="asunto"><strong>Asunto:</strong></label>
-                <h4 id="asunto" class="border p-2">{{ message.affair }}</h4>
+                <p id="asunto" class="border p-2">{{ message.affair }}</p>
         
                 <label for="usuario"><strong>Remitente:</strong></label>
                 <p id="usuario" class="border p-2">{{ message.name }}</p>
@@ -37,7 +37,7 @@
                 <p id="correo" class="border p-2">{{ message.date }}</p>
             </div>
             <div class="card-footer">
-                <a href="{% url 'AdminMessages' %}" class="btn btn-secondary btn-icon-split">
+                <a href="{% url 'home_admin' %}" class="btn btn-secondary btn-icon-split">
                     <span class="icon text-white-50">
                         <i class="fa-solid fa-arrow-left"></i>
                     </span>
@@ -49,7 +49,7 @@
                     </span>
                     <span class="text">Responder</span>
                 </a>
-                <a href="https://wa.me/53{{ message.phone }}" class="btn btn-success btn-icon-split">
+                <a href="https://wa.me/521{{ message.phone }}" class="btn btn-success btn-icon-split">
                     <span class="icon text-white-50">
                         <i class="fa-brands fa-whatsapp"></i>
                     </span>
@@ -77,7 +77,7 @@
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">
                                     Cancelar
                                 </button>
-                                <a class="btn btn-danger" href="{% url 'AdminMessagesDelete' message.id %}">Eliminar</a>
+                                <a class="btn btn-danger" href="#">Eliminar</a>
                             </div>
                         </div>
                     </div>

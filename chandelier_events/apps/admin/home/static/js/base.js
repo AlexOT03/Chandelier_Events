@@ -21,3 +21,24 @@ var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
 });
 
 // -- Add more form-set's to the template --
+$(document).ready(function() {
+    $('#add-form').click(function() {
+      var formset = $('#images');  // El contenedor del formset
+      var formCount = formset.children().length;  // Número actual de formularios
+  
+      // Clonar el último formulario y cambiar los índices de los campos
+      var newForm = formset.children(':last').clone();
+      newForm.find('input').each(function() {
+        var newName = $(this).attr('name').replace('-' + (formCount - 1) + '-', '-' + formCount + '-');
+        $(this).attr('name', newName);
+        $(this).val('');  // Limpiar los valores de los campos clonados si es necesario
+      });
+  
+      // Agregar el formulario clonado al final del formset
+      formset.append(newForm);
+  
+      // Opcional: si utilizas algún plugin o librería para estilizar los formularios, puedes inicializarlo para el nuevo formulario aquí
+  
+      // Opcional: si necesitas realizar alguna acción adicional después de añadir el formulario, puedes hacerlo aquí
+    });
+  });

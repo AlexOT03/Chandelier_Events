@@ -9,10 +9,10 @@ urlpatterns = [
     # path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     # path("about/", TemplateView.as_view(template_name="pages/about.html"), name="about"),
     # Django Admin, use {% url 'admin:index' %}
-    path(settings.ADMIN_URL, admin.site.urls),
+    path(settings.ADMIN_URL, admin.site.urls, name="super_admin"),
     # User management
-    path("users/", include("chandelier_events.users.urls", namespace="users")),
-    path("accounts/", include("allauth.urls")),
+    # path("users/", include("chandelier_events.users.urls", namespace="users")),
+    # path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
     # User URL's
     path("", include("chandelier_events.apps.user.home_page.urls")),

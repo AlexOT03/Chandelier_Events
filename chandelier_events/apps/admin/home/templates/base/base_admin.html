@@ -44,9 +44,15 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="{% url 'message_admin' %}">Mensajes</a>
-                        <a class="collapse-item" href="{% url 'quote_admin' %}">Cotizaciones</a>
+                        <a class="collapse-item" href="#">Foro</a>
                     </div>
                 </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'quote_admin' %}">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                    <span>Cotizaciones</span>
+                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed cursor-pointer" data-toggle="collapse" data-target="#collapseUtilities"
@@ -123,17 +129,17 @@
                                         </div>
                                         <div>
                                             <div class="small text-gray-500">
-                                                {{ quote.date }}
+                                                {{ quote.created_date }}
                                             </div>
                                             <span class="font-weight-bold">
-                                                {{ quote.subject }}
+                                                Cotizacion: {{ quote.location }}
                                             </span>
                                         </div>
                                     </a>
                                 {% endfor %}
-                                <a class="dropdown-item text-center small text-gray-500" href="#">
+                                <!-- <a class="dropdown-item text-center small text-gray-500" href="#">
                                     Mostrar todas las alertas
-                                </a>
+                                </a> -->
                             </div>
                         </li>
                         <li class="nav-item dropdown no-arrow mx-1">
@@ -162,7 +168,7 @@
                                         </div>
                                     </a>
                                 {% endfor %}
-                                <a class="dropdown-item text-center small text-gray-500" href="#">
+                                <a class="dropdown-item text-center small text-gray-500" href="{% url 'message_admin' %}">
                                   Leer más mensajes
                                 </a>
                             </div>
@@ -181,16 +187,23 @@
                                     <i class="fa-solid fa-user-pen fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Editar Perfil
                                 </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fa-solid fa-lock fa-sm fa-fw mr-2 text-gray-400"></i>
+                                <a class="dropdown-item" href="{% url 'password_reset' %}">
+                                    <i class="fa-solid fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cambiar contraseña
                                 </a>
+                                {% if user.is_superuser %}
+                                    <a class="dropdown-item" href="super_admin/">
+                                        <i class="fa-solid fa-unlock fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Super Admin
+                                    </a>
+                                {% endif %}
+
                                 <a class="dropdown-item" href="{% url 'home_user' %}">
                                     <i class="fa-sharp fa-solid fa-pager fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Ver sitio web
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="{% url 'home_logout_admin' %}" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cerrar sesión
                                 </a>
@@ -233,7 +246,7 @@
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">
                       Cancelar
                     </button>
-                    <a class="btn btn-danger" href="#">Cerrar sesión</a>
+                    <a class="btn btn-danger" href="{% url 'home_logout_admin' %}">Cerrar sesión</a>
                 </div>
             </div>
         </div>
@@ -244,6 +257,7 @@
   <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <!-- Core plugin JavaScript-->
   <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- Custom scripts for all pages-->
   <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
   <!-- Local boostrap 5 -->

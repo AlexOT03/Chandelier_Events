@@ -9,58 +9,68 @@
     <div class="container p-3">
         <div class="row justify-content-between align-items-center">
             <div class="col-12 col-md-7 col-lg-6 text-center text-md-left">
-                <h1 class="display-2 mb-2">{{ dato.name }}</h1>
-                <p class="lead mb-2 text-muted">{{ dato.description }}</p>
+                <h1 class="display-2 mb-2">{{ data_info.name }}</h1>
+                <p class="lead mb-2 text-muted">{{ data_info.description }}</p>
             </div>
             <div class="col-12 col-md-5 d-none d-md-block text-center image-container">
-                <img src="{{ dato.images.url}}" alt="">
+                <img src="{{ data_info.image.url}}" alt="">
             </div>
        </div>
         </div>
     </div>
 </section>
 {% else %}
-<section class="section-header bg-primary pt-6 pb-4 text-white">
-</section>
+<section class="section-header bg-primary pt-6 pb-4 text-white"></section>
 {% endif %}
 
 <section class="section section-sm">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-8 text-center">
-                <h1 class="display-2 mb-3">Blank starter page</h1>
-                <p>Hello world!</p>
-            </div>
+            {% if new_reference != "all" %}
+                <div class="col-12 col-md-8 text-center">
+                    <h1 class="display-2 mb-3">Encuentra las localizaciones que te ofrecemos según tus criterios de búsqueda.</h1>
+                    <p>Filtrando ubicaciones por "{{ data_info.name }}"</p>
+                </div>
+            {% else %}
+                <div class="col-12 col-md-8 text-center">
+                    <h1 class="display-2 mb-3">Explora las múltiples opciones de localización que te ofrece chandelier.</h1>
+                    <p>Seleccione una para empezar!</p>
+                </div>
+            {% endif %}
         </div>
         <div class="row">
             <div class="album">
                 <div class="pt-4 pb-4">
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
                         {% for location in locations %}
-                        <div class="col">
-                            <div class="card shadow-hover">
-                                <img src="{{ location.images.url}}" class="card-img-top" alt="..." />
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ location.name }}</h5>
-                                    <p class="card-subtitle">{{ location.location }}</p>
-                                    <div class="card-text">
-                                        <strong>Tematica</strong> | 
-                                        <small>{{ location.theme }}</small>
+                            <div class="col">
+                                <div class="card shadow-hover animate-up-1">
+                                    {% if location.image %}
+                                        <img src="{{ location.image.url }}" class="card-img-top rounded-top" alt="{{ location.image }}">
+                                    {% else %}
+                                        <p>No se encontro la imagen</p>
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ location.name }}</h5>
+                                        <p class="card-subtitle">{{ location.location }}</p>
+                                        <div class="card-text">
+                                            <strong>Tematica</strong> | 
+                                            <small>{{ location.theme }}</small>
+                                        </div>
+                                        <p class="card-text">
+                                            <strong>$</strong> <small>{{ location.price }}</small> | <span
+                                                class="fas fa-user-circle"></span> <small>{{ location.capacity }}</small>
+                                        </p>
+                                        <a href="{% url 'locationInfo_user' location.id %}" class="btn btn-primary animate-down-2">Mas informacion</a>
                                     </div>
-                                    <p class="card-text">
-                                        <strong>$</strong> <small>{{ location.price }}</small> | <span
-                                            class="fas fa-user-circle"></span> <small>{{ location.capacity }}</small>
-                                    </p>
-                                    <a href="{% url 'locationInfoHome' location.id %}" class="btn btn-primary">Mas informacion</a>
                                 </div>
                             </div>
-                        </div>
                         {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
                     <li class="page-item disabled">
@@ -74,7 +84,7 @@
                     </li>
                 </ul>
             </nav>
-        </div>
+        </div> -->
     </div>
 </section>
 {% endblock %}

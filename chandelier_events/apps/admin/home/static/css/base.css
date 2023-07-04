@@ -93,3 +93,22 @@
   /* color: white; */
   transition: 0.2s;
 }
+
+/* --Scroll lateral tipo galery-- */
+.slider-conteiner {
+  width: 100%;
+  position: relative;
+  display: flex;
+  overflow: scroll;
+  scroll-snap-type: x mandatory;
+}
+
+.slider-conteiner .slider-item {
+  width: 100%;
+  left: 0;
+  margin: 5px 10px 5px 0;
+  position: sticky;
+  object-fit: cover;
+  border-radius: 5px;
+  scroll-snap-align: center;
+}

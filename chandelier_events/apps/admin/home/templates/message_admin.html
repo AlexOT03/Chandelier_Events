@@ -19,7 +19,7 @@
             <div class="container p-3">
                 {% for message in messages %}
                     <div class="card mb-3 border-left-primary">
-                        <a href="#" class="hover text-decoration-none text-gray-600">
+                        <a href="{% url 'messageInfo_admin' message.id %}" class="hover text-decoration-none text-gray-600">
                             <div class="row g-0 justify-content-between">
                                 <div class="col">
                                     <div class="card-body">

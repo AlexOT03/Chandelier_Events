@@ -4,5 +4,91 @@
 {% block title %}Informacion{% endblock %}
 
 {% block content %}
-
+<div class="row justify-content-between">
+    <nav aria-label="breadcrumb" class="ml-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home_admin' %}">Tablero</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'quote_admin' %}">Cotizaciones</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Informacion</li>
+        </ol>
+    </nav>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h2>Cotizacion para evento</h2>
+            </div>
+            <div class="card-body">
+                <p class="card-text mb-0"><b>Cliente</b>: {{ quote.name }} {{ quote.last_name }}</p>
+                <span class="badge badge-primary mb-4">{{ quote.created_date }}</span>
+                <br>
+                <h5 class="card-title"><b>Caracteristicas</b></h5>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Nombres</th>
+                            <td>{{ quote.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Apellidos</th>
+                            <td>{{ quote.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Correo</th>
+                            <td>{{ quote.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Telefono</th>
+                            <td>{{ quote.phone }}</td>
+                        </tr>
+                        <tr>
+                            <th>Dia del evento</th>
+                            <td>{{ quote.date_of_event }}</td>
+                        </tr>
+                        <tr>
+                            <th>Hora de inicio</th>
+                            <td>{{ quote.start_time }}</td>
+                        </tr>
+                        <tr>
+                            <th>Hora de fin</th>
+                            <td>{{ quote.end_time }}</td>
+                        </tr>
+                        <tr>
+                            <th>Personas</th>
+                            <td>{{ quote.people }}</td>
+                        </tr>
+                        <tr>
+                            <th>Servicio</th>
+                            <td>{{ quote.service }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ubicacion</th>
+                            <td>{{ quote.location }}</td>
+                        </tr>
+                        <tr>
+                            <th>Presupuesto</th>
+                            <td>{{ quote.budget }}</td>
+                        </tr>
+                        <tr>
+                            <th>Enviado</th>
+                            <td>{{ quote.created_date }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Contactar por llamada: {{ quote.quote_by_phone|yesno:"Si,No" }}</li>
+                <li class="list-group-item">Contactar por correo: {{ quote.quote_by_email|yesno:"Si,No" }}</li>
+                <li class="list-group-item">Contactar por mensaje: {{ quote.quote_by_sms|yesno:"Si,No" }}</li>
+            </ul>
+            <div class="card-footer">
+                <a href="" class="btn btn-info btn-sm">
+                    <i class="fas fa-download fa-sm text-white-50"></i>
+                    Generar Cotizacion
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

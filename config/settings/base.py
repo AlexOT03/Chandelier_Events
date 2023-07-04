@@ -25,7 +25,7 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 # In Windows, this must be set to your system time zone.
 TIME_ZONE = "America/Mexico_City"
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "es-mx"
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
@@ -105,9 +105,9 @@ AUTHENTICATION_BACKENDS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = "users.User"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = "users:redirect"
+# LOGIN_REDIRECT_URL = "users:redirect"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
-LOGIN_URL = "account_login"
+# LOGIN_URL = "account_login"
 
 # PASSWORDS
 # ------------------------------------------------------------------------------
@@ -186,7 +186,14 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
                 "chandelier_events.users.context_processors.allauth_settings",
+                "chandelier_events.apps.admin.home.context_processors.messages",
+                "chandelier_events.apps.admin.home.context_processors.quotes",
+                "chandelier_events.apps.user.home_page.context_processors.themes",
+                "chandelier_events.apps.user.home_page.context_processors.states",
             ],
+            "libraries": {
+                'custom_tags': 'chandelier_events.apps.user.home_page.custom_tags',  
+            },
         },
     }
 ]
@@ -225,7 +232,7 @@ EMAIL_TIMEOUT = 5
 # ADMIN
 # ------------------------------------------------------------------------------
 # Django Admin URL.
-ADMIN_URL = "admin_admin/"
+ADMIN_URL = "admin/super_admin/"
 # https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = [("""Jesus Alejandro Otiz Trejo""", "jesus-alejandro-otiz-trejo@chandelier.com.mx")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers

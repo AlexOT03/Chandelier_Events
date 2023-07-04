@@ -4,3 +4,76 @@
 {% block title %}{{ state.name }}{% endblock %}
 
 {% block content %}
+<div class="row">
+    <nav aria-label="breadcrumb" class="ml-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home_admin' %}">Tablero</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'state_admin' %}">Estados</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Informacion</li>
+        </ol>
+    </nav>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h2>Detalles sobre el estado: {{ state.name }}</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <h6><b>Imagen</b></h6>
+                        <img class="img-fluid shadow rounded" src="{{ state.image.url }}" alt="{{ state.image }}">
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="table-responsive">
+                            <table class="table border shadow">
+                                <tbody>
+                                    <tr>
+                                        <th>ID</th>
+                                        <td>{{ state.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <td>{{ state.name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Descripcion</th>
+                                        <td>{{ state.description }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fecha de creacion</th>
+                                        <td>{{ state.created_date }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Estado</th>
+                                        <td>
+                                            {% if state.is_active == True %}
+                                                <div class="bg-success text-white text-center rounded-pill">
+                                                    <p class="p-2">Activo</p>
+                                                </div>
+                                            {% else %}
+                                                <div class="bg-danger text-white text-center rounded-pill">
+                                                    <p class="p-2">Inactivo</p>
+                                                </div>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'state_admin' %}" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </span>
+                    <span class="text">Regresar</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

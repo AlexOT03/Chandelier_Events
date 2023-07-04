@@ -11,13 +11,13 @@
         <div class="card shadow">
             <div class="card-body">
                 <h2 class="text-center mb-5">Ayúdanos a llenar el siguiente formulario.</h2>
-
-        <form action="#" method="POST">
-            
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary">Enviar Cotización</button>
-            </div>
-        </form>
+                <form action="#" method="POST">
+                    {% csrf_token %}
+                    {{ form_quote|crispy }}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Enviar Cotización</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

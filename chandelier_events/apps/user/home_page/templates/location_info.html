@@ -12,17 +12,25 @@
             <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
                 <div class="card shadow">
                     <div class="card-body">
-                        <div id="carouselExample" class="carousel slide">
+                        <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
                             <div class="carousel-inner">
-                              <div class="carousel-item active">
-                                <img src="{{ location.images.url }}" class="d-block w-100" alt="...">
-                              </div>
+                              {% for image in images %}
+                                {% if image.image %}
+                                    <div class="carousel-item active">
+                                        <img src="{{ image.image.url }}" class="d-block w-100 rounded" alt="{{ image.image }}">
+                                    </div>
+                                {% else %}
+                                    <div class="carousel-item active">
+                                        <svg class="bd-placeholder-img bd-placeholder-img-lg text-center d-block w-100 rounded" width="100%" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Imagen no disponible</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555" dy=".3em">Imagen no disponoble</text></svg>
+                                    </div>
+                                {% endif %}
+                              {% endfor %}
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
                               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                               <span class="visually-hidden">Previous</span>
                             </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
                               <span class="carousel-control-next-icon" aria-hidden="true"></span>
                               <span class="visually-hidden">Next</span>
                             </button>
@@ -36,24 +44,19 @@
                         <h2>{{ location.name }}</h2>
                     </div>
                     <div class="card-body">
-                        <p class="card-text">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            &nbsp; <b>5.0</b>
-                        </p>
-                        <p class="card-text"><a href="#"><i class="fa-solid fa-location-dot"></i>&nbsp; {{ location.location }}</a></p>
+                        <p class="card-text"><a href="{{ location.location_url }}"><i class="fa-solid fa-location-dot"></i>&nbsp; {{ location.location }}</a></p>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item ms-2"><i class="fa-solid fa-flag"></i>&nbsp; Estado: {{ location.state }}</li>
                         <li class="list-group-item ms-2"><i class="fa-solid fa-gift"></i>&nbsp; Tematica( <small class="cursor-pointer" data-bs-toggle="tooltip" data-bs-title="Esto no quiere decir que no se pueda usar para otro tipos de eventos sociales."><i>Opcional</i></small> ): {{ location.theme }}</li>
                     </ul>
                     <div class="card-footer">
-                        <a href="" class="btn btn-secondary-app animate-down-1 shadow-hover">Cotizar ahora!</a>
-                        <a href="" class="btn btn-outline-secondary-app animate-down-1 shadow-hover">
-                            <i class="fa-solid fa-phone"></i>
+                        <a href="{% url 'quote_user' location.id %}" class="btn btn-secondary-app animate-down-1 shadow-hover">Cotizar ahora!</a>
+                        <a href="https://wa.me/521{{ location.phone }}" class="btn btn-outline-success animate-down-1 shadow-hover">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:{{ location.email }}" class="btn btn-outline-info animate-down-1 shadow-hover">
+                            <i class="fa-regular fa-envelope"></i>
                         </a>
                     </div>
                 </div>
@@ -67,13 +70,34 @@
                     </div>
                     <div class="card-body">
                         <div class="row align-items-center text-center">
-                            <div class="col p-4"><i class="fa-solid fa-users-rectangle fa-xl"></i>&nbsp; <span data-bs-toggle="tooltip" data-bs-title="Puede variar dependiendo del tamaño o del distribuidor, este es un numero aproximado.">Hasta {{ location.capacity }} personas</span></div>
-                            <div class="col p-4"><i class="fa-solid fa-money-bill fa-xl"></i>&nbsp; <span data-bs-toggle="tooltip" data-bs-title="Coste de renta de la ubicacion, los servicios y demas pueden aumentar el precio.">Desde ${{ location.price }}</span></div>
-                            <div class="col p-4"><i class="fa-solid fa-gift fa-xl"></i>&nbsp; <span data-bs-toggle="tooltip" data-bs-title="Esto no quiere decir que no se pueda usar para otro tipos de eventos sociales.">Para eventos tipo  "{{ location.theme }}"</span></div>
+                            <div class="col p-4">
+                                <i class="fa-solid fa-users-rectangle fa-xl text-secondary"></i>&nbsp; 
+                                <span data-bs-toggle="tooltip" data-bs-title="Puede variar dependiendo del tamaño o del distribuidor, este es un numero aproximado.">Hasta {{ location.capacity }} personas</span>
+                            </div>
+                            <div class="col p-4">
+                                <i class="fa-solid fa-money-bill fa-xl text-success"></i>&nbsp; 
+                                <span data-bs-toggle="tooltip" data-bs-title="Coste de renta de la ubicacion, los servicios y demas pueden aumentar el precio.">Desde ${{ location.price }} la hora</span>
+                            </div>
+                            <div class="col p-4">
+                                <i class="fa-solid fa-gift fa-xl text-danger"></i>&nbsp; 
+                                <span data-bs-toggle="tooltip" data-bs-title="Esto no quiere decir que no se pueda usar para otro tipos de eventos sociales.">Recomendado para "{{ location.theme }}"</span>
+                            </div>
                         </div>
                         <div class="row align-items-center text-center">
-                            <div class="col p-4"><i class="fa-solid fa-square-parking fa-xl"></i>&nbsp; <span data-bs-toggle="tooltip" data-bs-title="Consulte con el distribuidor la disponivilidad del mismo.">Con estacionamiento</span></div>
-                            <div class="col p-4"><i class="fa-solid fa-user fa-xl"></i>&nbsp; <span>Dueño {{ location.owner }}</span></div>
+                            <div class="col p-4">
+                                <i class="fa-solid fa-square-parking fa-xl text-warning"></i>&nbsp; 
+                                <span data-bs-toggle="tooltip" data-bs-title="Consulte con el distribuidor la disponivilidad del mismo.">
+                                    {% if location.parking == true %}
+                                        Con estacionamiento
+                                    {% else %}
+                                        Sin estacionamiento
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <div class="col p-4">
+                                <i class="fa-solid fa-user fa-xl text-secondary-app"></i>&nbsp;
+                                <span>Dueño "{{ location.owner }}"</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -87,8 +111,8 @@
                     </div>
                     <div class="card-body">
                         <div class="d-flex flex-row mb-3">
-                            <div class="pe-4"><small>En Chandelier desde: {{ location.created_date }}</small></div>
-                            <div class="pe-4"><small>Ultima actualizacion: {{ location.created_date }}</small></div>
+                            <div class="pe-4 text-gray-600"><small>En Chandelier desde: {{ location.created_date }}</small></div>
+                            <div class="pe-4 text-gray-600"><small>Ultima actualizacion: {{ location.created_date }}</small></div>
                         </div>
                         <h6 class="card-title">Descripcion</h6>
                         <p class="card-text">

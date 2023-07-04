@@ -6,18 +6,19 @@ from django.utils.translation import gettext_lazy as _
 class QuotesForm(forms.ModelForm):
     class Meta:
         model = Quote
-        fields = "__all__"
+        # fields = "__all__"
+        exclude = {"location"}
         labels = {
             "name": _("Nombres"),
             "last_name": _("Apellidos"),
             "email": _("Correo"),
             "phone": _("Telefono"),
-            "day_fo_event": _("Dia del evento"),
+            "date_fo_event": _("Dia del evento"),
             "start_time": _("Hora de Inicio"),
             "end_time": _("Hora de Fin"),
             "people": _("Personas"),
             "service": _("Servicio"),
-            "location": _("Ubicacion"),
+            # "location": _("Ubicacion"),
             "budget": _("Presupuesto"),
             "quote_by_phone": _("Contactar por Llamada"),
             "quote_by_email": _("Contactar por Correo"),

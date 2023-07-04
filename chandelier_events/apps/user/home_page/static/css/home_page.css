@@ -1,21 +1,35 @@
 .scrollview-wrapper-x {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    /* Oculta la barra de desplazamiento del navegador */
-    -ms-overflow-style: none;
-    /* Oculta la barra de desplazamiento en Internet Explorer y Microsoft Edge */
-  }
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  /* Oculta la barra de desplazamiento del navegador */
+  -ms-overflow-style: none;
+  /* Oculta la barra de desplazamiento en Internet Explorer y Microsoft Edge */
+}
   
-  .scrollview-item {
-    flex: 0 0 auto;
-    width: 180px;
-    height: auto;
-    margin-right: 20px;
-    scroll-snap-align: start;
-  }
+.scrollview-item {
+  flex: 0 0 auto;
+  width: 180px;
+  height: auto;
+  margin-right: 20px;
+  scroll-snap-align: start;
+}
+
+.scrollview-item img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease; /* Transición suave */
+}
+
+.scrollview-item img:hover {
+  transform: scale(1.05); /* Hace crecer la imagen un 5% */
+}
+
+/* --Colorear imagenes--  */
   
 .colored-image-white {
   filter: invert(100%);

@@ -1,0 +1,76 @@
+{% extends 'base/base_admin.html' %}
+{% load static %}{% load crispy_forms_tags %}
+
+{% block title %}Editar {{ state.name }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <nav aria-label="breadcrumb" class="ml-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#" data-toggle="modal" data-target="#indexModal">Tablero</a></li>
+            <li class="breadcrumb-item"><a href="#" data-toggle="modal" data-target="#editModal">Estados</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Editar</li>
+        </ol>
+    </nav>
+</div>
+<div class="row">
+    <div class="modal fade" id="indexModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Regresar al tablero?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Si abandonas esta página, no se actualizarán los datos que hayas modificado. Para aplicar los cambios, haz clic en el botón “Actualizar”. Para salir sin actualizar, haz clic en el botón “Salir”.
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                      Cancelar
+                    </button>
+                    <a class="btn btn-danger" href="{% url 'home_admin' %}">Salir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Regresar a la pantalla anterior?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Si abandonas esta página, no se actualizarán los datos que hayas modificado. Para aplicar los cambios, haz clic en el botón “Actualizar”. Para salir sin actualizar, haz clic en el botón “Salir”.
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                      Cancelar
+                    </button>
+                    <a class="btn btn-danger" href="{% url 'state_admin' %}">Salir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h2>Editar Estado</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form_state|crispy }}
+                    <button type="submit" class="btn btn-primary">
+                        Actualizar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

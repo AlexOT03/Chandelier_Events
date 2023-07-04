@@ -70,7 +70,7 @@
                                         <ul class="list-style-none mb-4">
                                             {% for theme in themes %}
                                                 <li class="mb-2 megamenu-item">
-                                                    <a class="megamenu-link" href="{% url 'location_user' %}">{{ theme.name }}</a>
+                                                    <a class="megamenu-link" href="{% url 'location_user' 'theme' theme.id %}">{{ theme.name }}</a>
                                                 </li>
                                             {% endfor %}
                                         </ul>
@@ -80,7 +80,7 @@
                                         <ul class="list-style-none">
                                             {% for state in states %}
                                                 <li class="mb-2 megamenu-item">
-                                                    <a class="megamenu-link" href="{% url 'location_user' %}">{{ state.name }}</a>
+                                                    <a class="megamenu-link" href="{% url 'location_user' 'state' state.id %}">{{ state.name }}</a>
                                                 </li>
                                             {% endfor %}
                                         </ul>
@@ -95,7 +95,7 @@
                             <a class="nav-link" aria-current="page" href="{% url 'message_user' %}">Contactanos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Ingresar</a>
+                            <a class="nav-link" aria-current="page" href="{% url 'home_admin' %}">Ingresar</a>
                         </li>
                     </ul>
                 </div>

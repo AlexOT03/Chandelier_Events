@@ -4,6 +4,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path("admin/", adminPageView.as_view(), name="home_admin"),
+    path("admin/cerrar_sesion", adminPageView().logout, name="home_logout_admin"),
     
     # Message URL's
     path("admin/mensajes/", messagePageView.as_view(), name="message_admin"),

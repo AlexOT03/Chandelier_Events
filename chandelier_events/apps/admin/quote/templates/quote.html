@@ -6,84 +6,84 @@
 {% block content %}
 <div class="row">
     <nav aria-label="breadcrumb" class="ml-3">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Tablero</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Cotizaciones</li>
-      </ol>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home_admin' %}">Tablero</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Cotizaciones</li>
+        </ol>
     </nav>
-  </div>
-  <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
-      <div class="card shadow mb-4">
-        <div class="card-header py-3">
-          <h2>Cotizaciones</h2>
-          <h5>Bandeja de Entrada</h5>
-        </div>
-        <div class="container p-3">
-          <div class="card mb-3">
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Nombre</th>
-                      <th>Ubicacion</th>
-                      <th>Fecha</th>
-                      <th colspan="2">Opciones</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>ID</th>
-                      <th>Nombre</th>
-                      <th>Ubicacion</th>
-                      <th>Fecha</th>
-                      <th colspan="2">Opciones</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                    <tr class="border-left-info">
-                      <td>1</td>
-                      <td>Juan Manuel</td>
-                      <td>El rancho</td>
-                      <td>23/04/2023</td>
-                      <td><a href="#" class="btn btn-info"><i class="fa-solid fa-circle-info"></i></a></td>
-                      <td><a href="#" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h2>Cotizaciones</h2>
+                <h5>Bandeja de Entrada</h5>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
-      <div class="card shadow mb-4">
-        <div class="card-header py-3">
-          <h2>Cotizaciones Rapidas</h2>
-          <h5>Bandeja de Entrada</h5>
-        </div>
-        <div class="container p-3">
-          <div class="card mb-3 border-left-info">
-            <a href="#" class="hover text-decoration-none text-gray-600">
-              <div class="row g-0 justify-content-between">
-                <div class="col">
-                  <div class="card-body">
-                    <h5 class="card-title mb-0">Prueba</h5>
-                    <p class="card-text mt-0">Mas Prueba</p>
-                    <p class="card-text"><small>prueba extrema</small></p>
-                  </div>
+            <div class="container p-3">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Ubicacion</th>
+                                <th>Presupuesto</th>
+                                <th>Enviado</th>
+                                <th colspan="2">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Ubicacion</th>
+                                <th>Presupuesto</th>
+                                <th>Enviado</th>
+                                <th colspan="2">Opciones</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            {% for quote in quotes %}
+                                <tr class="border-left-info">
+                                    <td>{{ quote.id }}</td>
+                                    <td>{{ quote.name }}</td>
+                                    <td>{{ quote.location }}</td>
+                                    <td>${{ quote.budget }}</td>
+                                    <td>{{ quote.created_date }}</td>
+                                    <td><a href="{% url 'quoteInfo_admin' quote.id %}" class="btn btn-info"><i class="fa-solid fa-circle-info"></i></a></td>
+                                    <td>
+                                        <a class="btn btn-danger" data-toggle="modal" data-target="#alertModal{{ quote.id }}"><i class="fas fa-trash"></i></a>
+                                        <div class="modal fade" id="alertModal{{ quote.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">¿Está seguro?</h5>
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        ¿Está seguro de que desea eliminar la cotizacion seleccionada? Se eliminarán el siguientes objetos y sus elementos relacionados:
+                                                        <br>
+                                                        <small>Cotizacion: {{ quote.id }}</small>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                                                            Cancelar
+                                                        </button>
+                                                        <a class="btn btn-danger" href="{% url 'quoteDelete_admin' quote.id %}">Eliminar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 d-flex align-items-center justify-content-center">
-                  <p class="card-text text-center"><small>fecha</small></p>
-                </div>
-              </div>
-            </a>
-          </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 {% endblock %}
