@@ -4,6 +4,24 @@
 {% block title %}Inicio{% endblock %}
 
 {% block content %}
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Cotizacion enviada con exito!</h1>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+            </div>
+            <div class="modal-body">
+                Gracias por cotizar con nosotros. En Chandelier nos dedicamos a crear eventos inolvidables, con la mejor calidad y atención.
+                Te contactaremos lo antes posible con los detalles de tu cotización y las opciones disponibles.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-7 bg-primary text-white">
     <div class="container">
         <div class="row">
@@ -131,10 +149,10 @@
                                 características adicionales</li>
                         </ul>
                         <div class="d-grid">
-                            <a href="#" class="btn btn-primary mb-3 mt-2 me-2 me-md-3 animate-down-2">
+                            <a href="{% url 'quote_card_user' 1 %}" class="btn btn-primary mb-3 mt-2 me-2 me-md-3 animate-down-2">
                                 <span class="fa-solid fa-basket-shopping me-2"></span>
-                                <span class="d-none d-md-inline">Comprar ahora</span>
-                                <span class="d-md-none">Comprar</span>
+                                <span class="d-none d-md-inline">Cotizar ahora</span>
+                                <span class="d-md-none">Cotizar</span>
                             </a>
                         </div>
                     </div>
@@ -163,10 +181,10 @@
                                 del cliente</li>
                         </ul>
                         <div class="d-grid">
-                            <a href="#" class="btn btn-primary mb-3 mt-2 me-2 me-md-3 animate-down-2">
+                            <a href="{% url 'quote_card_user' 2 %}" class="btn btn-primary mb-3 mt-2 me-2 me-md-3 animate-down-2">
                                 <span class="fa-solid fa-basket-shopping me-2"></span>
-                                <span class="d-none d-md-inline">Comprar ahora</span>
-                                <span class="d-md-none">Comprar</span>
+                                <span class="d-none d-md-inline">Cotizar ahora</span>
+                                <span class="d-md-none">Cotizar</span>
                             </a>
                         </div>
                     </div>
@@ -196,10 +214,10 @@
                                 características adicionales</li>
                         </ul>
                         <div class="d-grid">
-                            <a href="#" class="btn btn-primary mb-3 mt-2 me-2 me-md-3 animate-down-2">
+                            <a href="{% url 'quote_card_user' 3 %}" class="btn btn-primary mb-3 mt-2 me-2 me-md-3 animate-down-2">
                                 <span class="fa-solid fa-basket-shopping me-2"></span>
-                                <span class="d-none d-md-inline">Comprar ahora</span>
-                                <span class="d-md-none">Comprar</span>
+                                <span class="d-none d-md-inline">Cotizar ahora</span>
+                                <span class="d-md-none">Cotizar</span>
                             </a>
                         </div>
                     </div>

@@ -26,7 +26,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
-                                <th>Ubicacion</th>
+                                <th>Apellido</th>
                                 <th>Presupuesto</th>
                                 <th>Enviado</th>
                                 <th colspan="2">Opciones</th>
@@ -36,7 +36,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
-                                <th>Ubicacion</th>
+                                <th>Apellido</th>
                                 <th>Presupuesto</th>
                                 <th>Enviado</th>
                                 <th colspan="2">Opciones</th>
@@ -47,7 +47,7 @@
                                 <tr class="border-left-info">
                                     <td>{{ quote.id }}</td>
                                     <td>{{ quote.name }}</td>
-                                    <td>{{ quote.location }}</td>
+                                    <td>{{ quote.last_name }}</td>
                                     <td>${{ quote.budget }}</td>
                                     <td>{{ quote.created_date }}</td>
                                     <td><a href="{% url 'quoteInfo_admin' quote.id %}" class="btn btn-info"><i class="fa-solid fa-circle-info"></i></a></td>

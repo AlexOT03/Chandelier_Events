@@ -16,10 +16,19 @@ backToTopButton.onclick = function() {
   document.documentElement.scrollTop = 0;
 };
 
-//loader screen
-window.onload = function() {
-  var contenedor = document.getElementById('contenedor_carga');
+// -- Select2 multy select --
+$(document).ready(function() {
+  $('#id_service_detail').select2();
+});
 
-  contenedor.style.visibility = 'hidden';
-  contenedor.style.opacity = '0';
-}
+// -- Código JavaScript para activar el modal al cargar la página --
+// document.addEventListener("DOMContentLoaded", function() {
+//   $('#myModal').modal('show');
+// });
+// document.addEventListener("DOMContentLoaded", function() {
+//   var show_modal = document.body.getAttribute('data-show-modal');
+
+//   if (show_modal === 'true') {
+//       $('#myModal').modal('show');
+//   }
+// });

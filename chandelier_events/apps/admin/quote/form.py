@@ -7,19 +7,20 @@ class QuotesForm(forms.ModelForm):
     class Meta:
         model = Quote
         # fields = "__all__"
-        exclude = {"location"}
+        exclude = {"total_service"}
         labels = {
-            "name": _("Nombres"),
-            "last_name": _("Apellidos"),
+            "name": _("Nombre"),
+            "last_name": _("Apellido"),
             "email": _("Correo"),
             "phone": _("Telefono"),
-            "date_fo_event": _("Dia del evento"),
+            "date_of_event": _("Dia del evento"),
             "start_time": _("Hora de Inicio"),
             "end_time": _("Hora de Fin"),
             "people": _("Personas"),
-            "service": _("Servicio"),
+            'service_detail': _("Servicios"),
             # "location": _("Ubicacion"),
             "budget": _("Presupuesto"),
+            "message": _("Comentarios"),
             "quote_by_phone": _("Contactar por Llamada"),
             "quote_by_email": _("Contactar por Correo"),
             "quote_by_sms": _("Contactar por Mensaje"),

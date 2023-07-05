@@ -70,7 +70,13 @@
                                 <tr>
                                     <td>{{ service.id }}</td>
                                     <td>{{ service.name }}</td>
-                                    <td><img src="{{ service.image.url }}" class="img-fluid img-thumbnail img-sm" alt="{{ service.image }}"></td>
+                                    <td>
+                                        {% if service.image %}
+                                        <img src="{{ service.image.url }}" class="img-fluid img-thumbnail img-sm" alt="{{ service.image }}">
+                                        {% else %}
+                                        <img src="" alt="Imagen no disponible">
+                                        {% endif %}
+                                    </td>
                                     <td>
                                         {% if service.is_active == True %}
                                             <div class="bg-success text-white text-center rounded-pill">

@@ -4,7 +4,7 @@
 {% block title %}{{ service.name }}{% endblock %}
 
 {% block content %}
-<div class="row">
+<div class="row mb-4">
     <nav aria-label="breadcrumb" class="ml-3">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'home_admin' %}">Tablero</a></li>
@@ -80,30 +80,53 @@
                     <div class="container">
                         <h4>Tamaños</h4>
                     </div>
-                </div>
-                <div class="row">
-                    {% for details in service_details%}
-                        <div class="col-sm-12 col-md-4 col-lg-4 col-xl4">
-                            <div class="table-responsive">
-                                <table class="table border shadow">
-                                    <thead>
-                                        <tr>
-                                            <th>Tamaño</th>
-                                            <th>Precio</th>
-                                            <th>Duracion</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{{ details.get_size_display }}</td>
-                                            <td>{{ details.price }}</td>
-                                            <td>{{ details.duration }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                    {% if services_detail|length > 1 %}
+                        {% for details in service_details%}
+                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl4">
+                                <div class="table-responsive">
+                                    <table class="table border shadow">
+                                        <thead>
+                                            <tr>
+                                                <th>Tamaño</th>
+                                                <th>Precio</th>
+                                                <th>Duracion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ details.get_size_display }}</td>
+                                                <td>${{ details.price }}</td>
+                                                <td>{{ details.duration }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        {% for details in service_details%}
+                           <div class="col">
+                               <div class="table-responsive">
+                                   <table class="table border shadow">
+                                       <thead>
+                                           <tr>
+                                               <th>Tamaño</th>
+                                               <th>Precio</th>
+                                               <th>Duracion</th>
+                                           </tr>
+                                       </thead>
+                                       <tbody>
+                                           <tr>
+                                               <td>{{ details.get_size_display }}</td>
+                                               <td>${{ details.price }}</td>
+                                               <td>{{ details.duration }}</td>
+                                           </tr>
+                                       </tbody>
+                                   </table>
+                               </div>
+                           </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
             <div class="card-footer">

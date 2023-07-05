@@ -1,6 +1,7 @@
 from django import forms
 from .models import State
 from PIL import Image
+import io
 from django.utils.translation import gettext_lazy as _
 
 # create a ModelForm

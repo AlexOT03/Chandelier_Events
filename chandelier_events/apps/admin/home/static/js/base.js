@@ -42,3 +42,15 @@ $(document).ready(function() {
       // Opcional: si necesitas realizar alguna acción adicional después de añadir el formulario, puedes hacerlo aquí
     });
   });
+
+// -- Detect if a form field is not empty --
+$(document).ready(function() {
+  
+
+});
+
+// Select2 multy select
+$(document).ready(function() {
+  $('.selectmultiple').select2();
+  
+});

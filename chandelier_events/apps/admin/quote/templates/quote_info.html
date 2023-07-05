@@ -35,6 +35,10 @@
                             <td>{{ quote.last_name }}</td>
                         </tr>
                         <tr>
+                            <th>Presupuesto</th>
+                            <td>${{ quote.budget }}</td>
+                        </tr>
+                        <tr>
                             <th>Correo</th>
                             <td>{{ quote.email }}</td>
                         </tr>
@@ -59,16 +63,16 @@
                             <td>{{ quote.people }}</td>
                         </tr>
                         <tr>
-                            <th>Servicio</th>
-                            <td>{{ quote.service }}</td>
+                            <th>Servicios</th>
+                            <td>{{ quote.service_detail.all|join:", " }}</td>
                         </tr>
                         <tr>
-                            <th>Ubicacion</th>
-                            <td>{{ quote.location }}</td>
+                            <th>Moto por servicios</th>
+                            <td>${{ quote.total_service }}</td>
                         </tr>
                         <tr>
-                            <th>Presupuesto</th>
-                            <td>{{ quote.budget }}</td>
+                            <th>Mensjae</th>
+                            <td>{{ quote.message }}</td>
                         </tr>
                         <tr>
                             <th>Enviado</th>

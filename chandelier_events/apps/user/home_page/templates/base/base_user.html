@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chandelier | {% block title %}{% endblock %}</title>
+    <!-- Select2 style for this tempalte -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="120x120" href="{% static 'img/favicon/apple-touch-icon.png' %}" />
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo/chandelier-64-logo.png' %}" />
@@ -184,6 +186,9 @@
     <button class="btn btn-primary position-fixed bottom-0 end-0 m-3" id="back-to-top" style="display: none;">
         <i class="fa-solid fa-angle-up"></i>
     </button>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- select2 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- Core -->
     <script src="{% static 'vendor/@popperjs/core/dist/umd/popper.min.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.min.js' %}"></script>

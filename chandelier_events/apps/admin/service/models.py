@@ -17,6 +17,7 @@ class Service(models.Model):
 
 class ServiceDetail(models.Model):
     SIZES = (
+        (0, "Personalizado"),
         (1, "Pequeño"),
         (2, "Mediano"),
         (3, "Grande"),
@@ -28,4 +29,4 @@ class ServiceDetail(models.Model):
     duration = models.DurationField(blank=True, null=True)
 
     def __str__(self):
-        return self.service
+        return f"{self.service.name} - ${self.price}"

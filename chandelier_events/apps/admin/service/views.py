@@ -35,10 +35,38 @@ class servicePageView(LoginRequiredMixin, View):
         if form_service.is_valid() and form_service_details.is_valid():
             service = form_service.save()
             
-            for form in form_service_details:
-                   hours = form.save(commit=False)
-                   hours.service = service
-                   hours.save()
+            for i, form in enumerate(form_service_details):
+                if i == 0 and form.cleaned_data['size'] == 0:
+                    hours = form.save(commit=False)
+                    hours.service = service
+                    hours.save()
+                    break  # Salir del bucle después de guardar el primer formulario
+                else:
+                    hours = form.save(commit=False)
+                    hours.service = service
+                    hours.save()
+            
+            # for i, form in enumerate(form_service_details):
+            #     if i == 0 and form.cleaned_data['size'] == 0:
+            #         hours = form.save(commit=False)
+            #         hours.service = service
+            #         hours.save()
+            #         break  # Exit the loop after saving the first form
+            #     else:
+            #         hours = form.save(commit=False)
+            #         hours.service = service
+            #         hours.save()
+            
+            # for i, form in enumerate(form_service_details):
+            #     if i == 0 or form.cleaned_data['size'] != 0:
+            #         hours = form.save(commit=False)
+            #         hours.service = service
+            #         hours.save()
+            
+            # for form in form_service_details:
+            #        hours = form.save(commit=False)
+            #        hours.service = service
+            #        hours.save()
             
         else:
             return render(request, 'service.html', {
