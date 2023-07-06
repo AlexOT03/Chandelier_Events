@@ -1,10 +1,10 @@
 {% extends 'base/base_admin.html' %}
-{% load static %}{% load crispy_forms_tags %}
+{% load static %}{% load crispy_forms_tags %}{% load humanize %}
 
 {% block title %}Informacion{% endblock %}
 
 {% block content %}
-<div class="row justify-content-between">
+<div class="row">
     <nav aria-label="breadcrumb" class="ml-3">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'home_admin' %}">Tablero</a></li>
@@ -16,80 +16,65 @@
 <div class="row">
     <div class="col">
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h2>Cotizacion para evento</h2>
+            <div class="card-header">
+                <h2>Cotizacion {{ quote.id }}</h2>
+                <p><strong>Fecha de envio:</strong> {{ quote.created_date }}</p>
             </div>
             <div class="card-body">
-                <p class="card-text mb-0"><b>Cliente</b>: {{ quote.name }} {{ quote.last_name }}</p>
-                <span class="badge badge-primary mb-4">{{ quote.created_date }}</span>
-                <br>
-                <h5 class="card-title"><b>Caracteristicas</b></h5>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <tr>
-                            <th>Nombres</th>
-                            <td>{{ quote.name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Apellidos</th>
-                            <td>{{ quote.last_name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Presupuesto</th>
-                            <td>${{ quote.budget }}</td>
-                        </tr>
-                        <tr>
-                            <th>Correo</th>
-                            <td>{{ quote.email }}</td>
-                        </tr>
-                        <tr>
-                            <th>Telefono</th>
-                            <td>{{ quote.phone }}</td>
-                        </tr>
-                        <tr>
-                            <th>Dia del evento</th>
-                            <td>{{ quote.date_of_event }}</td>
-                        </tr>
-                        <tr>
-                            <th>Hora de inicio</th>
-                            <td>{{ quote.start_time }}</td>
-                        </tr>
-                        <tr>
-                            <th>Hora de fin</th>
-                            <td>{{ quote.end_time }}</td>
-                        </tr>
-                        <tr>
-                            <th>Personas</th>
-                            <td>{{ quote.people }}</td>
-                        </tr>
-                        <tr>
-                            <th>Servicios</th>
-                            <td>{{ quote.service_detail.all|join:", " }}</td>
-                        </tr>
-                        <tr>
-                            <th>Moto por servicios</th>
-                            <td>${{ quote.total_service }}</td>
-                        </tr>
-                        <tr>
-                            <th>Mensjae</th>
-                            <td>{{ quote.message }}</td>
-                        </tr>
-                        <tr>
-                            <th>Enviado</th>
-                            <td>{{ quote.created_date }}</td>
-                        </tr>
-                    </table>
+                <div class="row border-bottom mb-4">
+                    <div class="col-md-6">
+                        <h3>Datos personales</h3>
+                        <p><strong>Nombre:</strong> {{ quote.name }}</p>
+                        <p><strong>Apellido:</strong> {{ quote.last_name }}</p>
+                        <p><strong>Correo:</strong> {{ quote.email }}</p>
+                        <p><strong>Teléfono:</strong> {{ quote.phone }}</p>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h3>Detalles del evento</h3>
+                        <p><strong>Tipo de evento:</strong> {{ quote.theme }}</p>
+                        <p><strong>Fecha del evento:</strong> {{ quote.date_of_event }}</p>
+                        <p><strong>Hora de inicio:</strong> {{ quote.start_time }}</p>
+                        <p><strong>Hora de finalización:</strong> {{ quote.end_time }}</p>
+                        <p><strong>Número de personas:</strong> {{ quote.people }}</p>
+                    </div>
+                </div>
+                <div class="row border-bottom mb-4">
+                    <div class="col-md-6">
+                        <h3>Detalles de servicios</h3>
+                        <p><strong>Detalles del servicio:</strong> {{ quote.service_detail.all|join:" - " |intcomma }}</p>
+                        <p><strong>Presupuesto extra:</strong> {{ quote.budget }}</p>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h3>Opciones de cotización</h3>
+                        <p><strong>Contactar por llamada:</strong> {{ quote.quote_by_phone|yesno:"Si,No" }}</p>
+                        <p><strong>Contactar por correo:</strong> {{ quote.quote_by_email|yesno:"Si,No" }}</p>
+                        <p><strong>Contactar por mensaje:</strong> {{ quote.quote_by_sms|yesno:"Si,No" }}</p>
+                    </div>
+                </div>
+                <div class="row border-bottom mb-4">
+                    <div class="col">
+                        <h3>Comentarios del cliente</h3>
+                        <p><strong>Mensaje:</strong> {{ quote.message }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Total por servicios: ${{ quote.total_service|intcomma }}</h3>
+                        <h4>{{ total_text }} pesos</h4>
+                    </div>
                 </div>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Contactar por llamada: {{ quote.quote_by_phone|yesno:"Si,No" }}</li>
-                <li class="list-group-item">Contactar por correo: {{ quote.quote_by_email|yesno:"Si,No" }}</li>
-                <li class="list-group-item">Contactar por mensaje: {{ quote.quote_by_sms|yesno:"Si,No" }}</li>
-            </ul>
             <div class="card-footer">
-                <a href="" class="btn btn-info btn-sm">
+                <a href="{% url 'pdf_view' quote.id %}" target="_blank" class="btn btn-info btn-sm">
+                    <i class="fa-solid fa-magnifying-glass fa-sm text-white-50"></i>
+                    <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+                    Ver Cotizacion
+                </a>
+                <a href="{% url 'pdf_download' quote.id %}" class="btn btn-success btn-sm">
                     <i class="fas fa-download fa-sm text-white-50"></i>
-                    Generar Cotizacion
+                    Descargar Cotizacion
                 </a>
             </div>
         </div>

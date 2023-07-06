@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.contrib.humanize.templatetags.humanize import intcomma
 
 # Create your models here.
 class Service(models.Model):
@@ -29,4 +30,5 @@ class ServiceDetail(models.Model):
     duration = models.DurationField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.service.name} - ${self.price}"
+        formatted_price = intcomma(self.price)
+        return f"{self.service.name} - ${formatted_price}"

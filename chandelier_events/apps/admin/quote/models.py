@@ -14,7 +14,6 @@ class Quote(models.Model):
     end_time = models.TimeField()
     people = models.IntegerField()
     service_detail = models.ManyToManyField(ServiceDetail)
-    # location = models.ForeignKey(Location, on_delete=models.PROTECT)
     budget = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
     message = models.TextField(blank=True)
     quote_by_phone = models.BooleanField(default=False)
