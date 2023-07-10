@@ -17,40 +17,39 @@
     <div class="col">
         <div class="card shadow mb-4">
             <div class="card-header">
-                <h2>Cotizacion {{ quote.id }}</h2>
+                <h2>Cotizacion para {{ quote.theme }}, ID:{{ quote.id }}</h2>
                 <p><strong>Fecha de envio:</strong> {{ quote.created_date }}</p>
             </div>
             <div class="card-body">
                 <div class="row border-bottom mb-4">
                     <div class="col-md-6">
                         <h3>Datos personales</h3>
-                        <p><strong>Nombre:</strong> {{ quote.name }}</p>
-                        <p><strong>Apellido:</strong> {{ quote.last_name }}</p>
-                        <p><strong>Correo:</strong> {{ quote.email }}</p>
-                        <p><strong>Teléfono:</strong> {{ quote.phone }}</p>
+                        <p class="mb-1"><b>Nombre:</b> {{ quote.name }}</p>
+                        <p class="mb-1"><b>Apellido:</b> {{ quote.last_name }}</p>
+                        <p class="mb-1"><b>Correo:</b> {{ quote.email }}</p>
+                        <p class="mb-1"><b>Teléfono:</b> {{ quote.phone }}</p>
                     </div>
                     
                     <div class="col-md-6">
                         <h3>Detalles del evento</h3>
-                        <p><strong>Tipo de evento:</strong> {{ quote.theme }}</p>
-                        <p><strong>Fecha del evento:</strong> {{ quote.date_of_event }}</p>
-                        <p><strong>Hora de inicio:</strong> {{ quote.start_time }}</p>
-                        <p><strong>Hora de finalización:</strong> {{ quote.end_time }}</p>
-                        <p><strong>Número de personas:</strong> {{ quote.people }}</p>
+                        <p class="mb-1"><b>Tipo de evento:</b> {{ quote.theme }}</p>
+                        <p class="mb-1"><b>Fecha del evento:</b> {{ quote.date_of_event }}</p>
+                        <p class="mb-1"><b>Hora de inicio:</b> {{ quote.start_time }}</p>
+                        <p class="mb-1"><b>Hora de finalización:</b> {{ quote.end_time }}</p>
+                        <p class="mb-1"><b>Número de personas:</b> {{ quote.people }}</p>
                     </div>
                 </div>
                 <div class="row border-bottom mb-4">
                     <div class="col-md-6">
                         <h3>Detalles de servicios</h3>
-                        <p><strong>Detalles del servicio:</strong> {{ quote.service_detail.all|join:" - " |intcomma }}</p>
-                        <p><strong>Presupuesto extra:</strong> {{ quote.budget }}</p>
+                        <p><b>Detalles del servicio:</b> {{ quote.service_detail.all|join:" - " |intcomma }}</p>
                     </div>
                     
                     <div class="col-md-6">
                         <h3>Opciones de cotización</h3>
-                        <p><strong>Contactar por llamada:</strong> {{ quote.quote_by_phone|yesno:"Si,No" }}</p>
-                        <p><strong>Contactar por correo:</strong> {{ quote.quote_by_email|yesno:"Si,No" }}</p>
-                        <p><strong>Contactar por mensaje:</strong> {{ quote.quote_by_sms|yesno:"Si,No" }}</p>
+                        <p class="mb-1"><b>Contactar por llamada:</b> {{ quote.quote_by_phone|yesno:"Si,No" }}</p>
+                        <p class="mb-1"><b>Contactar por correo:</b> {{ quote.quote_by_email|yesno:"Si,No" }}</p>
+                        <p class="mb-1"><b>Contactar por mensaje:</b> {{ quote.quote_by_sms|yesno:"Si,No" }}</p>
                     </div>
                 </div>
                 <div class="row border-bottom mb-4">
@@ -59,23 +58,58 @@
                         <p><strong>Mensaje:</strong> {{ quote.message }}</p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Total por servicios: ${{ quote.total_service|intcomma }}</h3>
-                        <h4>{{ total_text }} pesos</h4>
+                
+                {% if quote_details %}
+                    <div class="row border-bottom mb-4">
+                        <div class="col-md-12">
+                            <h3>Total por servicios: ${{ quote.total_service|intcomma }}</h3>
+                            <h4>{{ total_text }} pesos</h4>
+                        </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>Detalles del empleado</h3>
+                            <p class="mb-1"><b>Empleado:</b> {{ quote_details.name }}</p>
+                            <p class="mb-1"><b>Fecha de creacion</b> {{ quote_details.created_date }}</p>
+                            <p class="mb-1"><b>Fecha de actualizacion</b> {{ quote_details.update_date }}</p>
+                            <p class="mb-1"><b>Recomendaciones:</b> {{ quote_details.message }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Detalles de costo</h3>
+                            <p><b>Transporte:</b> {{ quote_details.transport }}</p>
+                            <p><b>IVA:</b> {{ quote_details.get_iva_display }}%</p>
+                            <p><b>Descuento:</b> {{ quote_details.discount }}</p>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Total por servicios: ${{ quote.total_service|intcomma }}</h3>
+                            <h4>{{ total_text }} pesos</h4>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
             <div class="card-footer">
-                <a href="{% url 'pdf_view' quote.id %}" target="_blank" class="btn btn-info btn-sm">
-                    <i class="fa-solid fa-magnifying-glass fa-sm text-white-50"></i>
-                    <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
-                    Ver Cotizacion
-                </a>
-                <a href="{% url 'pdf_download' quote.id %}" class="btn btn-success btn-sm">
-                    <i class="fas fa-download fa-sm text-white-50"></i>
-                    Descargar Cotizacion
-                </a>
+                {% if quote_details %}
+                    <a href="{% url 'quoteDetailsEdit_admin' quote.id %}" class="btn btn-warning btn-sm">
+                        <i class="fa-solid fa-clipboard fa-sm text-white-50"></i>
+                        Actualizr Cotizacion
+                    </a>
+                    <a href="{% url 'pdf_view' quote.id %}" target="_blank" class="btn btn-info btn-sm">
+                        <i class="fa-solid fa-magnifying-glass fa-sm text-white-50"></i>
+                        Ver PDF
+                    </a>
+                    <a href="{% url 'pdf_download' quote.id %}" class="btn btn-success btn-sm">
+                        <i class="fas fa-download fa-sm text-white-50"></i>
+                        Descargar PDF
+                    </a>
+                {% else %}
+                    <a href="{% url 'quoteDetails_admin' quote.id %}" class="btn btn-success btn-sm">
+                        <i class="fa-solid fa-clipboard fa-sm text-white-50"></i>
+                        Cotizar
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>

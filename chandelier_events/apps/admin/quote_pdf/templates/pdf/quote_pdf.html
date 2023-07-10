@@ -1,0 +1,216 @@
+{% load humanize %}{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ pdf_title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        
+        h2 {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        
+        h2 img {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1px solid #ccc;
+            margin: 20px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 2px;
+            border: 1px solid #ccc;
+        }
+        
+        th {
+            background-color: #f0f0f0;
+        }
+        
+        th strong {
+            font-weight: bold;
+        }
+        
+        strong {
+            font-weight: bold;
+        }
+        
+        .table {
+            margin-bottom: 20px;
+        }
+        
+        p {
+            margin-bottom: 10px;
+        }
+        
+        i {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h2>Chandelier.com.mx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://cdn3.iconfinder.com/data/icons/crystal-chandeliers/66/11-512.png" alt="Logo Chandelier" width="100" height="100"></h2>
+    <small><b>Recibido el </b>{{ send_day|date:"d-m-y / H:i" }}</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small><b>Cotizado el</b> {{ created_day|date:"d-m-y" }}</small>
+    <hr>
+    <p>ID: {{ quote_folio }}</p>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th><strong>Nombre:</strong></th>
+                <td>{{ name }}</td>
+                <th><strong>Correo:</strong></th>
+                <td>{{ email }}</td>
+            </tr>
+            <tr>
+                <th><strong>Apellido:</strong></th>
+                <td>{{ last_name }}</td>
+                <th><strong>Telefono:</strong></th>
+                <td>{{ phone }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <p>&iexcl;Saludos!<br>Le agradecemos por contactarnos y confiar en nosotros para solicitar una cotizaci&oacute;n. Hemos procesado su solicitud con atenci&oacute;n y le ofrecemos los siguientes productos que se ajustan a sus necesidades:</p>
+    <table>
+        <thead>
+            <tr>
+                <th><strong>Clave</strong></th>
+                <th><strong>Nombre</strong></th>
+                <th><strong>Tama&ntilde;o</strong></th>
+                <th><strong>Duracion</strong></th>
+                <th>&nbsp;</th>
+                <th><strong>Precio</strong></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for service in services_list %}
+                <tr>
+                    <td>{{ service.id }}</td>
+                    <td>{{ service.service.name }}</td>
+                    <td>{{ service.get_size_display }}</td>
+                    <td>{{ service.duration }} Horas</td>
+                    <td>&nbsp;</td>
+                    <td>${{ service.price|intcomma }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <table>
+        <tbody>
+            <tr>
+                <td style="text-align: center; background-color: #f0f0f0;" colspan="2"><b>Detalles del evento</b></td>
+                <td>&nbsp;</td>
+                <td>Total por servicios</td>
+                <td>${{ services_total_price|intcomma }}</td>
+            </tr>
+            <tr>
+                <td style="background-color: #f0f0f0;"><b>Dia del evento</b></td>
+                <td>{{ day_of_event }}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td style="background-color: #f0f0f0;"><b>Hora de inicio</b></td>
+                <td>{{ start_time }}</td>
+                <td>&nbsp;</td>
+                <td>Transporte</td>
+                <td>${{ transport|intcomma }}</td>
+            </tr>
+            <tr>
+                <td style="background-color: #f0f0f0;"><b>Hora de fin</b></td>
+                <td>{{ end_time }}</td>
+                <td>&nbsp;</td>
+                <td>IVA {{ iva_number }}%</td>
+                <td>${{ iva_price|intcomma }}</td>
+            </tr>
+            <tr>
+                <td style="background-color: #f0f0f0;"><b>Tematica</b></td>
+                <td>
+                    {% if theme_event != None %}
+                        {{ theme_event }}
+                    {% else %}
+                        No especificada
+                    {% endif %}
+                </td>
+                <td>&nbsp;</td>
+                <td>Descuento</td>
+                <td>
+                    {% if discount != None %}
+                        ${{ discount }}
+                    {% else %}
+                        No aplica
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color: #f0f0f0;"><b>Personas</b></td>
+                <td>{{ people }}</td>
+                <td>&nbsp;</td>
+                <td style="background-color: #f0f0f0;">
+                    <h3><b>Total</b></h3>
+                </td>
+                <td>
+                    <h3>${{ total_price|intcomma }}</h3>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p style="text-align: right;"><b>Total:</b> <i>{{ total_price_words }} Pesos Mexicanos</i></p>
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Recomendacion y Observaciones
+                </th>
+                <th>
+                    Comentarios del Cliente
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    {% if observations != None %}
+                        {{ observations }}
+                    {% else %}
+                        Sin Comentarios
+                    {% endif %}
+                </td>
+                <td>
+                    {% if client_observations != None %}
+                        {{ client_observations }}
+                    {% else %}
+                        Sin Comentarios
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <p>Esperamos que nuestra propuesta sea de su agrado y que podamos contar con su preferencia. Quedamos a su disposici&oacute;n para cualquier consulta o comentario.</p>
+    <p>Atentamente, {{ user_name }}, equipo t&eacute;cnico de Chandelie</p>
+    <br>
+    <p style="text-align: center;"><b><i>Reforma S/N Rio Viejo 1ra Secci&oacute;n, 86127 Villahermosa, Tab.</i></b></p>
+</body>
+</html>

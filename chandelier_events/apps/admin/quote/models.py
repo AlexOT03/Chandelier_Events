@@ -2,6 +2,7 @@ from django.db import models
 from chandelier_events.apps.admin.service.models import Service
 from chandelier_events.apps.admin.service.models import Service, ServiceDetail
 from chandelier_events.apps.admin.location.models import Location
+from chandelier_events.apps.admin.theme.models import Theme
 
 # Create your models here.
 class Quote(models.Model):
@@ -14,7 +15,7 @@ class Quote(models.Model):
     end_time = models.TimeField()
     people = models.IntegerField()
     service_detail = models.ManyToManyField(ServiceDetail)
-    budget = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
+    theme = models.ForeignKey(Theme, blank=True, null=True, on_delete=models.PROTECT)
     message = models.TextField(blank=True)
     quote_by_phone = models.BooleanField(default=False)
     quote_by_email = models.BooleanField(default=True)

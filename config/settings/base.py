@@ -78,6 +78,7 @@ LOCAL_APPS = [
     "chandelier_events.apps.admin.home",
     "chandelier_events.apps.admin.location",
     "chandelier_events.apps.admin.quote",
+    "chandelier_events.apps.admin.quote_pdf",
     "chandelier_events.apps.admin.service",
     "chandelier_events.apps.admin.state",
     "chandelier_events.apps.admin.theme",

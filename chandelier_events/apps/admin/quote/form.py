@@ -18,7 +18,7 @@ class QuotesForm(forms.ModelForm):
             "end_time": _("Hora de Fin"),
             "people": _("Personas"),
             'service_detail': _("Servicios"),
-            # "location": _("Ubicacion"),
+            "theme": _("Tematica"),
             "budget": _("Presupuesto"),
             "message": _("Comentarios"),
             "quote_by_phone": _("Contactar por Llamada"),
