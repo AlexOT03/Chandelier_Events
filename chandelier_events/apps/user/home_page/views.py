@@ -10,8 +10,10 @@ from chandelier_events.apps.admin.theme.models import Theme
 # Create your views here.
 class homePageView(View):
     def get(self, request, **kwargs):
-        states = State.objects.all()
-        locations = Location.objects.all()
+        states = State.objects.all().filter(is_active=True)
+        themes = Theme.objects.all().filter(is_active=True)
+        services = Service.objects.all().filter(is_active=True)
+        locations = Location.objects.all().filter(is_active=True, state__in = states, theme__in=themes)
         locations_images = {}
         
         for location in locations:
@@ -25,30 +27,46 @@ class homePageView(View):
         return render(request, 'index.html', {
             'states': states,
             'locations': locations,
+            'services': services
         })
     
 class quotePageView(View):
-    def get(self, request, size, **kwargs):
+    def get(self, request, size, id, **kwargs):
         service_ids = [0]
-        service_ids.append(size)
+        if id != 0:
+            location = Location.objects.get(id=id)
+            service_ids.append(location.size)
+        else:
+            service_ids.append(size)
+            
         form_quote = QuotesForm()
-        form_quote.fields['service_detail'].queryset = ServiceDetail.objects.filter(size__in=service_ids)
+        service_active = Service.objects.filter(is_active=True)
+        form_quote.fields['service_detail'].queryset = ServiceDetail.objects.filter(size__in=service_ids, service__in=service_active)
         
         return render(request, 'quote_user.html', {
             'form_quote': form_quote,
         })
 
-    def post(self, request, size, **kwargs):
+    def post(self, request, size, id, **kwargs):
         service_ids = [0]
-        service_ids.append(size)
+        location = None
+        if id != 0:
+            location = Location.objects.get(id=id)
+            service_ids.append(location.size)
+        else:
+            service_ids.append(size)
+            
         form_quote = QuotesForm(request.POST, request.FILES)
-        form_quote.fields['service_detail'].queryset = ServiceDetail.objects.filter(size__in=service_ids)
+        service_active = Service.objects.filter(is_active=True)
+        form_quote.fields['service_detail'].queryset = ServiceDetail.objects.filter(size__in=service_ids, service__in=service_active)
 
         if form_quote.is_valid():
             quote = form_quote.save(commit=False)
             selected_service_details = form_quote.cleaned_data['service_detail']
             total_price = sum(service_detail.price for service_detail in selected_service_details)
             quote.total_service = total_price
+            if location != None:
+                quote.location = location
             quote.save()
             quote.service_detail.set(selected_service_details)
             
@@ -65,9 +83,12 @@ class locationPageView(View):
         locations = None
         locations_images = {}
         if reference != "all":
+            states = State.objects.all().filter(is_active=True)
+            themes = Theme.objects.all().filter(is_active=True)
+            
             if reference == "state":
                 data_info = State.objects.get(id=id)
-                locations = Location.objects.filter(state=id)
+                locations = Location.objects.filter(state=id, is_active=True, state__in=states, theme__in=themes)
                 for location in locations:
                     image = Image.objects.filter(location=location).first()
                     if image:
@@ -76,7 +97,7 @@ class locationPageView(View):
                         
             else:
                 data_info = Theme.objects.get(id=id)
-                locations = Location.objects.filter(theme=id)
+                locations = Location.objects.filter(theme=id, is_active=True, state__in=states, theme__in=themes)
                 for location in locations:
                     image = Image.objects.filter(location=location).first()
                     if image:
@@ -84,7 +105,9 @@ class locationPageView(View):
                         location.image = locations_images[location.id]
                         
         else:
-            locations = Location.objects.all()
+            states = State.objects.all().filter(is_active=True)
+            themes = Theme.objects.all().filter(is_active=True)
+            locations = Location.objects.all().filter(is_active=True, state__in=states, theme__in=themes)
             for location in locations:
                     image = Image.objects.filter(location=location).first()
                     

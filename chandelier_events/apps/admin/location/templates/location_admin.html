@@ -56,6 +56,9 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
+                    <div class="search p-2">
+                        <input type="search" class="form-control me-2" name="buscador" id="buscador" placeholder="Buscar..">
+                    </div>
                     <table class="table table-hover" cellspacing="0">
                         <thead>
                             <tr>
@@ -75,9 +78,9 @@
                                 <th colspan="3">Opciones</th>
                             </tr>
                         </tfoot>
-                        <tbody>
+                        <tbody id="listaObjetos">
                             {% for location in locations %}
-                                <tr>
+                                <tr class="objetos">
                                     <td>{{ location.id }}</td>
                                     <td>{{ location.name }}</td>
                                     <td>

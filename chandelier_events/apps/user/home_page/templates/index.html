@@ -29,17 +29,17 @@
                 <div class="bootstrap-big-icon d-none d-lg-block">
                     <img src="{% static 'img/logo/chandelier-512-logo.png' %}" alt="" width="700" height="622" class="d-block my-1 colored-image-white">
                 </div>
-                <h1 class="fw-bolder display-2">CHANDELIER</h1>
+                <h1 class="fw-bolder display-2 text_cursive">CHANDELIER</h1>
                 <h2 class="lead fw-normal text-muted mb-4 px-lg-10">
                     ¡Descubre un mundo de lugares extraordinarios!
                     <br>
                     Celebra momentos inolvidables con nosotros.
                 </h2>
                 <div class="d-flex justify-content-center align-items-center mb-5">
-                    <a href="#services" class="btn btn-tertiary mb-3 mt-2 me-2 me-md-3 animate-up-2">
+                    <a href="#ca" class="btn btn-tertiary mb-3 mt-2 me-2 me-md-3 animate-up-2">
                         <span class="fa-solid fa-bell-concierge me-2"></span>
-                        <span class="d-none d-md-inline">Explorar servicios</span>
-                        <span class="d-md-none">Servicios</span>
+                        <span class="d-none d-md-inline">Explorar Categorias</span>
+                        <span class="d-md-none">Categorias</span>
                     </a>
                     <a href="#get-start" class="btn btn-tertiary mb-3 mt-2 me-2 me-md-3 animate-up-2">
                         <span class="fa-solid fa-location-dot me-2"></span>
@@ -56,46 +56,6 @@
             <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
         </svg>
     </figure>
-</section>
-
-<section class="section section-sm" id="services">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 class="section-title">Nuestro servicios</h3>
-                <div class="section-title-divider"></div>
-                <p class="section-description">
-                    At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                    blanditiis praesentium
-                </p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-4 col-md-6 service-item">
-                <h4 class="service-title">Cotizacion personalizada</h4>
-                <p class="service-description">
-                    Con nuestro sitio web, puedes ingresar los detalles de tu evento, con esta informacion, se te
-                    proporcionará una cotización personalizada basada en los precios y servicios de los proveedores de
-                    lugares asociados.
-                </p>
-            </div>
-            <div class="col-lg-4 col-md-6 service-item">
-                <h4 class="service-title">Busqueda y visualizacion de lugares</h4>
-                <p class="service-description">
-                    Minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat tarad limino ata
-                </p>
-            </div>
-            <div class="col-lg-4 col-md-6 service-item">
-                <h4 class="service-title">Sed ut perspiciatis</h4>
-                <p class="service-description">
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                    dolore eu fugiat nulla pariatur
-                </p>
-            </div>
-        </div>
-    </div>
 </section>
 
 <section class="section section-sm" id="get-start">
@@ -119,7 +79,7 @@
     </div>
 </section>
 
-<section class="section section-sm">
+<section class="section section-sm" id="ca">
     <div class="container">
         <div class="row">
             <h2 class="text-center">¡Sumérgete en una experiencia única y participa en nuestros eventos online!</h2>
@@ -149,7 +109,7 @@
                                 características adicionales</li>
                         </ul>
                         <div class="d-grid">
-                            <a href="{% url 'quote_card_user' 1 %}" class="btn btn-primary mb-3 mt-2 me-2 me-md-3 animate-down-2">
+                            <a href="{% url 'quote_card_user' 1 0 %}" class="btn btn-primary mb-3 mt-2 me-2 me-md-3 animate-down-2">
                                 <span class="fa-solid fa-basket-shopping me-2"></span>
                                 <span class="d-none d-md-inline">Cotizar ahora</span>
                                 <span class="d-md-none">Cotizar</span>
@@ -181,7 +141,7 @@
                                 del cliente</li>
                         </ul>
                         <div class="d-grid">
-                            <a href="{% url 'quote_card_user' 2 %}" class="btn btn-primary mb-3 mt-2 me-2 me-md-3 animate-down-2">
+                            <a href="{% url 'quote_card_user' 2 0 %}" class="btn btn-primary mb-3 mt-2 me-2 me-md-3 animate-down-2">
                                 <span class="fa-solid fa-basket-shopping me-2"></span>
                                 <span class="d-none d-md-inline">Cotizar ahora</span>
                                 <span class="d-md-none">Cotizar</span>
@@ -214,7 +174,7 @@
                                 características adicionales</li>
                         </ul>
                         <div class="d-grid">
-                            <a href="{% url 'quote_card_user' 3 %}" class="btn btn-primary mb-3 mt-2 me-2 me-md-3 animate-down-2">
+                            <a href="{% url 'quote_card_user' 3 0 %}" class="btn btn-primary mb-3 mt-2 me-2 me-md-3 animate-down-2">
                                 <span class="fa-solid fa-basket-shopping me-2"></span>
                                 <span class="d-none d-md-inline">Cotizar ahora</span>
                                 <span class="d-md-none">Cotizar</span>
@@ -264,6 +224,60 @@
             <div class="col text-center">
                 <a href="{% url 'location_user' 'all' 1 %}" class="btn btn-outline-primary">Ver las {{ locations.count }} ubicaciones <span class="fa-solid fa-arrow-right"></span></a>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="section-title">Nuestro servicios</h3>
+                <div class="section-title-divider"></div>
+                <p class="section-description">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus qui
+                    blanditiis praesentium
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 service-item">
+                <h4 class="service-title">Cotizacion personalizada</h4>
+                <p class="service-description">
+                    Con nuestro sitio web, puedes ingresar los detalles de tu evento, con esta informacion, se te
+                    proporcionará una cotización personalizada basada en los precios y servicios de los proveedores de
+                    lugares asociados.
+                </p>
+            </div>
+            <div class="col-lg-6 col-md-6 service-item">
+                <h4 class="service-title">Busqueda y visualizacion de lugares</h4>
+                <p class="service-description">
+                    Minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat tarad limino ata
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            {% for service in services %}
+                {% if forloop.counter <= 4 %}
+                    <div class="col-md-3 mb-2">
+                        <div class="custom-card-container">
+                            <div class="custom-card border">
+                                <div class="custom-front">
+                                    <img src="{{ service.image.url }}" alt="Image 1">
+                                    <div class="custom-text">
+                                        <h3 class="text_cursive">{{ service.name }}</h3>
+                                    </div>
+                                </div>
+                                <div class="custom-back">
+                                    <h3>{{ service.name|title }}</h3>
+                                    <p>{{ service.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -357,26 +371,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<section class="section section-sm">
-    <div class="container">
-        <div class="row">
-            <h2>Total de ubicaciones para eventos.</h2>
-        </div>
-        <div class="row">
-            <ul class="">
-                {% for estado in estados %}
-                <li class="p-2 d-flex justify-content-between shadow-hover">
-                    <a href="">{{ estado.name }}</a>
-                    <small>
-                        {{ locations.all.count }}
-                    </small>
-                </li>
-                {% endfor %}
-            </ul>
         </div>
     </div>
 </section>

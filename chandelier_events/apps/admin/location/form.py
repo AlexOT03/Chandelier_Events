@@ -26,6 +26,7 @@ class LocationsForm(forms.ModelForm):
             "description": _("Descripción"),
             "web_site": _("Sitio web"),
             "is_active": _("Activo"),
+            "size": _("Tamaño"),
             "parking": _("Estacionamiento"),
         }
 

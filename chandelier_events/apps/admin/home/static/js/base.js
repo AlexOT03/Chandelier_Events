@@ -49,8 +49,19 @@ $(document).ready(function() {
 
 });
 
-// Select2 multy select
+// -- Select2 multy select --
 $(document).ready(function() {
   $('.selectmultiple').select2();
   
+});
+
+// -- Buscador de datos --
+document.addEventListener("keyup", e => {
+  if (e.target.id === "buscador") {
+    document.querySelectorAll(".objetos").forEach(elemento => {
+      elemento.textContent.toLowerCase().includes(e.target.value.toLowerCase())
+        ? elemento.classList.remove("filtro")
+        : elemento.classList.add("filtro");
+    });
+  }
 });

@@ -16,6 +16,7 @@ class Quote(models.Model):
     people = models.IntegerField()
     service_detail = models.ManyToManyField(ServiceDetail)
     theme = models.ForeignKey(Theme, blank=True, null=True, on_delete=models.PROTECT)
+    location = models.ForeignKey(Location, blank=True, null=True, on_delete=models.PROTECT)
     message = models.TextField(blank=True)
     quote_by_phone = models.BooleanField(default=False)
     quote_by_email = models.BooleanField(default=True)

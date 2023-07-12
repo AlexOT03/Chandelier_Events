@@ -21,13 +21,16 @@
             </div>
             <div class="container p-3">
                 <div class="table-responsive">
+                    <div class="search p-2">
+                        <input type="text" class="form-control me-2" name="buscador" id="buscador" placeholder="Buscar..">
+                    </div>
                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
-                                <th>Presupuesto</th>
+                                <th>Cotizado</th>
                                 <th>Enviado</th>
                                 <th colspan="2">Opciones</th>
                             </tr>
@@ -37,19 +40,29 @@
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
-                                <th>Presupuesto</th>
+                                <th>Cotizado</th>
                                 <th>Enviado</th>
                                 <th colspan="2">Opciones</th>
                             </tr>
                         </tfoot>
-                        <tbody>
+                        <tbody id="listaObjetos">
                             {% for quote in quotes %}
-                                <tr class="border-left-info">
+                                {% if quote.is_on %}
+                                <tr class="border-left-success objetos">
+                                {% else %}
+                                <tr class="border-left-danger objetos">
+                                {% endif %}
                                     <td>{{ quote.id }}</td>
                                     <td>{{ quote.name }}</td>
                                     <td>{{ quote.last_name }}</td>
-                                    <td>${{ quote.budget }}</td>
-                                    <td>{{ quote.created_date }}</td>
+                                    <td>
+                                        {% if quote.is_on != True %}
+                                            No Cotizado
+                                        {% else %}
+                                            {{ quote.on_date }}
+                                        {% endif %}
+                                    </td>                                    
+                                    <td>{{ quote.created_date|date:"d/m/y | H:i" }}</td>
                                     <td><a href="{% url 'quoteInfo_admin' quote.id %}" class="btn btn-info"><i class="fa-solid fa-circle-info"></i></a></td>
                                     <td>
                                         <a class="btn btn-danger" data-toggle="modal" data-target="#alertModal{{ quote.id }}"><i class="fas fa-trash"></i></a>

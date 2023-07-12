@@ -4,6 +4,12 @@ from chandelier_events.apps.admin.theme.models import Theme
 
 # Create your models here.
 class Location(models.Model):
+    SIZES = (
+        (1, 'Pequeño'),
+        (2, 'Mediano'),
+        (3, 'Grande'),
+    )
+    
     name = models.CharField(max_length=100)
     owner = models.CharField(max_length=100)
     location = models.CharField(max_length=200)
@@ -20,6 +26,7 @@ class Location(models.Model):
     web_site = models.URLField(blank=True, null=True)
     parking = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    size = models.IntegerField(choices=SIZES)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 

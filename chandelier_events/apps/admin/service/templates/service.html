@@ -12,40 +12,17 @@
         </ol>
     </nav>
 </div>
-<div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h2>Nuevo Servicio</h2>
-            </div>
-            <div class="card-body">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form_service|crispy }}
-
-                    <label for="details"><h6><strong>Detalles</strong></h6></label>
-                    <div class="scrollview-wrapper-x mb-3" id="details">
-                        {{ form_service_details.management_form }}
-                        {% for form_details in form_service_details %}
-                            <div class="scrollview-item-md">
-                                {{ form_details|crispy }}
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        Registrar
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+<div class="row mb-4">
+    <div class="col">
         <div class="card shadow md-4">
             <div class="card-header py-3">
                 <h2>Servicios</h2>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
+                    <div class="search p-2">
+                        <input type="text" class="form-control me-2" name="buscador" id="buscador" placeholder="Buscar..">
+                    </div>
                     <table class="table table-hover" cellspacing="0">
                         <thead>
                             <tr>
@@ -65,9 +42,9 @@
                                 <th colspan="3">Opciones</th>
                             </tr>
                         </tfoot>
-                        <tbody>
+                        <tbody id="listaObjetos">
                             {% for service in services %}
-                                <tr>
+                                <tr class="objetos">
                                     <td>{{ service.id }}</td>
                                     <td>{{ service.name }}</td>
                                     <td>
@@ -121,6 +98,34 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h2>Nuevo Servicio</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form_service|crispy }}
+
+                    <label for="details"><h6><strong>Detalles</strong></h6></label>
+                    <div class="scrollview-wrapper-x mb-3" id="details">
+                        {{ form_service_details.management_form }}
+                        {% for form_details in form_service_details %}
+                            <div class="scrollview-item-md">
+                                {{ form_details|crispy }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Registrar
+                    </button>
+                </form>
             </div>
         </div>
     </div>

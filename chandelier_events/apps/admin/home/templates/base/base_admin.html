@@ -26,7 +26,7 @@
                 <div class="sidebar-brand-icon">
                     <img src="{% static 'img/logo/chandelier-64-logo.png' %}" class="colored-image-white sm-obj-x40-y40" alt="">
                 </div>
-              <div class="sidebar-brand-text mx-3">Chandelier</div>
+              <div class="sidebar-brand-text mx-3 text_cursive">Chandelier</div>
             </div>
             <hr class="sidebar-divider my-0" />
             <li class="nav-item">
@@ -46,7 +46,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="{% url 'message_admin' %}">Mensajes</a>
-                        <a class="collapse-item" href="#">Foro</a>
+                        <a class="collapse-item disable" href="#">Foro</a>
                     </div>
                 </div>
             </li>
@@ -57,18 +57,16 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed cursor-pointer" data-toggle="collapse" data-target="#collapseUtilities"
-                  aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link" href="{% url 'location_admin' %}">
                     <i class="fa-solid fa-location-dot"></i>
                     <span>Ubicaciones</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="{% url 'theme_admin' %}">Tematicas</a>
-                        <a class="collapse-item" href="{% url 'location_admin' %}">Ubicaciones</a>
-                    </div>
-                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'theme_admin' %}">
+                    <i class="fa-solid fa-gift"></i>
+                    <span>Tematicas</span>
+                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'state_admin' %}">

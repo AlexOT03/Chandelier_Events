@@ -1,5 +1,5 @@
 {% extends 'base/base_user.html' %}
-{% load static %}{% load crispy_forms_tags %}
+{% load static %}{% load crispy_forms_tags %}{% load custom_tags %}
 
 {% block title %}{{ location.name }}{% endblock %}
 
@@ -25,10 +25,6 @@
                                             <img src="{{ image.image.url }}" class="d-block w-100 rounded" alt="{{ image.image }}">
                                         </div>
                                     {% endif %}
-                                {% else %}
-                                    <div class="carousel-item active">
-                                        <svg class="bd-placeholder-img bd-placeholder-img-lg text-center d-block w-100 rounded" width="100%" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Imagen no disponible</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555" dy=".3em">Imagen no disponoble</text></svg>
-                                    </div>
                                 {% endif %}
                               {% endfor %}
                             </div>
@@ -57,7 +53,7 @@
                         <li class="list-group-item ms-2"><i class="fa-solid fa-gift"></i>&nbsp; Tematica( <small class="cursor-pointer" data-bs-toggle="tooltip" data-bs-title="Esto no quiere decir que no se pueda usar para otro tipos de eventos sociales."><i>Opcional</i></small> ): {{ location.theme }}</li>
                     </ul>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-secondary-app animate-down-1 shadow-hover">Cotizar ahora!</a>
+                        <a href="{% url 'quote_card_user' 0 location.id %}" class="btn btn-secondary-app animate-down-1 shadow-hover">Cotizar ahora!</a>
                         <a href="https://wa.me/521{{ location.phone }}" class="btn btn-outline-success animate-down-1 shadow-hover">
                             <i class="fa-brands fa-whatsapp"></i>
                         </a>
@@ -99,6 +95,10 @@
                                         Sin estacionamiento
                                     {% endif %}
                                 </span>
+                            </div>
+                            <div class="col p-4">
+                                <i class="fa-solid fa-crop fa-xl text-info"></i>&nbsp; 
+                                <span data-bs-toggle="tooltip" data-bs-title="Esta es una recomendacion generada por el dueño, no obstante puede ser omitida.">Para eventos {{ location.get_size_display }}s</span>
                             </div>
                             <div class="col p-4">
                                 <i class="fa-solid fa-user fa-xl text-secondary-app"></i>&nbsp;
@@ -162,9 +162,9 @@
                         <h4>Detalles Tecnicos</h4>
                     </div>
                     <div class="card-body">
-                        El terreno tiene una superficie de <strong>m²</strong>, 
-                        con unas dimensiones de <strong>{{location.location_length|floatformat:2}}m de largo</strong> por <strong>{{ location.location_width|floatformat:2 }}m de ancho.</strong>
-                        {% if location.location_length != location.location_width %}
+                        El terreno tiene una superficie de <strong>{{location.length|floatformat:2|multiply:location.width|floatformat:2}}m²</strong>, 
+                        con unas dimensiones de <strong>{{location.length|floatformat:2}}m de largo</strong> por <strong>{{ location.width|floatformat:2 }}m de ancho.</strong>
+                        {% if location.length != location.width %}
                         <img src="{% static 'img/terrain/rectangulo.png' %}" class="mx-auto d-block" alt="Terreno rectangular"/>
                         {% else %}
                         <img src="{% static 'img/terrain/cuadrado.png' %}" class="mx-auto d-block" alt="Terreno cuadrado"/>

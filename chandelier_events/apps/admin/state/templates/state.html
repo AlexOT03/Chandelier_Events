@@ -36,6 +36,9 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
+                    <div class="search p-2">
+                        <input type="text" class="form-control me-2" name="buscador" id="buscador" placeholder="Buscar..">
+                    </div>
                     <table class="table table-hover" cellspacing="0">
                         <thead>
                             <tr>
@@ -55,9 +58,9 @@
                                 <th colspan="3">Opciones</th>
                             </tr>
                         </tfoot>
-                        <tbody>
+                        <tbody id="listaObjetos">
                             {% for state in states %}
-                                <tr>
+                                <tr class="objetos">
                                     <td>{{ state.id }}</td>
                                     <td>{{ state.name }}</td>
                                     <td><img src="{{ state.image.url }}" class="img-fluid img-thumbnail img-sm" alt="{{ state.image }}"></td>

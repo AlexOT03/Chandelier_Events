@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
 /* desactivat objetos */
 .disable {
   pointer-events: none;
@@ -111,4 +113,18 @@
   object-fit: cover;
   border-radius: 5px;
   scroll-snap-align: center;
+}
+
+/* -- buscador de js -- */
+.filtro {
+  display: none;
+  transition: 0.5s;
+}
+
+#listaObjetos {
+  transition: 0.5s;
+}
+
+.text_cursive {
+  font-family: 'Dancing Script', cursive;
 }

@@ -62,15 +62,10 @@ class locationPageView(LoginRequiredMixin, View):
                 hours.save()
                 
             for i, form in enumerate(form_images):
-                if i < 5:  # Limitar el número de formularios guardados a 5
+                if i < 5:
                     image = form.save(commit=False)
                     image.location = location
                     image.save()
-
-            # for form in form_images:
-            #     image = form.save(commit=False)
-            #     image.location = location
-            #     image.save()
 
             return redirect('location_admin')
 

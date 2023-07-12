@@ -15,6 +15,7 @@
 
 */
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 
 .datepicker {
     display: none;
@@ -358,7 +359,9 @@
     --bs-gray-600: #6B7280;
     --bs-gray-700: #4B5563;
     --bs-gray-800: #374151;
+    /* --bs-font-sans-serif: 'Dancing Script', cursive; */
     --bs-font-sans-serif: "Nunito Sans", sans-serif;
+    /* font-family: 'Dancing Script', cursive; */
     --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
 }

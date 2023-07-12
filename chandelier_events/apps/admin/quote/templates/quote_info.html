@@ -18,43 +18,47 @@
         <div class="card shadow mb-4">
             <div class="card-header">
                 <h2>Cotizacion para {{ quote.theme }}, ID:{{ quote.id }}</h2>
+                {% if quote_details %}
+                    <h3>ID: {{ quote_details.folio }}</h3>
+                {% endif %}
                 <p><strong>Fecha de envio:</strong> {{ quote.created_date }}</p>
             </div>
             <div class="card-body">
                 <div class="row border-bottom mb-4">
                     <div class="col-md-6">
-                        <h3>Datos personales</h3>
-                        <p class="mb-1"><b>Nombre:</b> {{ quote.name }}</p>
-                        <p class="mb-1"><b>Apellido:</b> {{ quote.last_name }}</p>
-                        <p class="mb-1"><b>Correo:</b> {{ quote.email }}</p>
-                        <p class="mb-1"><b>Teléfono:</b> {{ quote.phone }}</p>
+                        <h3>Datos del Cliente</h3>
+                        <p class=""><b>Nombre:</b> {{ quote.name }}</p>
+                        <p class=""><b>Apellido:</b> {{ quote.last_name }}</p>
+                        <p class=""><b>Correo:</b> {{ quote.email }}</p>
+                        <p class=""><b>Teléfono:</b> {{ quote.phone }}</p>
                     </div>
                     
                     <div class="col-md-6">
-                        <h3>Detalles del evento</h3>
-                        <p class="mb-1"><b>Tipo de evento:</b> {{ quote.theme }}</p>
-                        <p class="mb-1"><b>Fecha del evento:</b> {{ quote.date_of_event }}</p>
-                        <p class="mb-1"><b>Hora de inicio:</b> {{ quote.start_time }}</p>
-                        <p class="mb-1"><b>Hora de finalización:</b> {{ quote.end_time }}</p>
-                        <p class="mb-1"><b>Número de personas:</b> {{ quote.people }}</p>
+                        <h3>Detalles del Evento</h3>
+                        <p class=""><b>Tipo de evento:</b> {{ quote.theme }}</p>
+                        <p class=""><b>Ubicacion del evento:</b> {{ quote.location }}</p>
+                        <p class=""><b>Fecha del evento:</b> {{ quote.date_of_event }}</p>
+                        <p class=""><b>Hora de inicio:</b> {{ quote.start_time }}</p>
+                        <p class=""><b>Hora de finalización:</b> {{ quote.end_time }}</p>
+                        <p class=""><b>Número de personas:</b> {{ quote.people }}</p>
                     </div>
                 </div>
                 <div class="row border-bottom mb-4">
                     <div class="col-md-6">
-                        <h3>Detalles de servicios</h3>
+                        <h3>Detalles de Servicios</h3>
                         <p><b>Detalles del servicio:</b> {{ quote.service_detail.all|join:" - " |intcomma }}</p>
                     </div>
                     
                     <div class="col-md-6">
-                        <h3>Opciones de cotización</h3>
-                        <p class="mb-1"><b>Contactar por llamada:</b> {{ quote.quote_by_phone|yesno:"Si,No" }}</p>
-                        <p class="mb-1"><b>Contactar por correo:</b> {{ quote.quote_by_email|yesno:"Si,No" }}</p>
-                        <p class="mb-1"><b>Contactar por mensaje:</b> {{ quote.quote_by_sms|yesno:"Si,No" }}</p>
+                        <h3>Opciones de Contacto</h3>
+                        <p class=""><b>Contactar por llamada:</b> {{ quote.quote_by_phone|yesno:"Si,No" }}</p>
+                        <p class=""><b>Contactar por correo:</b> {{ quote.quote_by_email|yesno:"Si,No" }}</p>
+                        <p class=""><b>Contactar por mensaje:</b> {{ quote.quote_by_sms|yesno:"Si,No" }}</p>
                     </div>
                 </div>
                 <div class="row border-bottom mb-4">
                     <div class="col">
-                        <h3>Comentarios del cliente</h3>
+                        <h3>Comentarios del Cliente</h3>
                         <p><strong>Mensaje:</strong> {{ quote.message }}</p>
                     </div>
                 </div>
@@ -62,17 +66,17 @@
                 {% if quote_details %}
                     <div class="row border-bottom mb-4">
                         <div class="col-md-12">
-                            <h3>Total por servicios: ${{ quote.total_service|intcomma }}</h3>
-                            <h4>{{ total_text }} pesos</h4>
+                            <h3>Subtotal: ${{ quote.total_service|intcomma }}</h3>
+                            <h4>{{ total_text }} Pesos Mexicanos</h4>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row border-bottom mb-4">
                         <div class="col-md-6">
-                            <h3>Detalles del empleado</h3>
-                            <p class="mb-1"><b>Empleado:</b> {{ quote_details.name }}</p>
-                            <p class="mb-1"><b>Fecha de creacion</b> {{ quote_details.created_date }}</p>
-                            <p class="mb-1"><b>Fecha de actualizacion</b> {{ quote_details.update_date }}</p>
-                            <p class="mb-1"><b>Recomendaciones:</b> {{ quote_details.message }}</p>
+                            <h3>Detalles Generales</h3>
+                            <p class=""><b>Empleado:</b> {{ quote_details.name }}</p>
+                            <p class=""><b>Fecha de creacion</b> {{ quote_details.created_date }}</p>
+                            <p class=""><b>Fecha de actualizacion</b> {{ quote_details.update_date }}</p>
+                            <p class=""><b>Recomendaciones:</b> {{ quote_details.message }}</p>
                         </div>
                         <div class="col-md-6">
                             <h3>Detalles de costo</h3>
@@ -81,11 +85,17 @@
                             <p><b>Descuento:</b> {{ quote_details.discount }}</p>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Total: ${{ total_price|intcomma }}</h3>
+                            <h4>{{ total_price_text }} Pesos Mexicanos</h4>
+                        </div>
+                    </div>
                 {% else %}
                     <div class="row">
                         <div class="col-md-12">
-                            <h3>Total por servicios: ${{ quote.total_service|intcomma }}</h3>
-                            <h4>{{ total_text }} pesos</h4>
+                            <h3>Subtotal: ${{ quote.total_service|intcomma }}</h3>
+                            <h4>{{ total_text }} Pesos Mexicanos</h4>
                         </div>
                     </div>
                 {% endif %}

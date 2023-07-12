@@ -11,7 +11,7 @@ urlpatterns = [
     path("nosotros/", aboutPageView.as_view(), name="about_user"),
     # URL's quote page
     # path("cotizar/ubicacion/<id>/", quotePageView.as_view(), name="quote_user"),
-    path("cotizar_evento/<size>/", quotePageView.as_view(), name="quote_card_user"),
+    path("cotizar_evento/<size>/<int:id>/", quotePageView.as_view(), name="quote_card_user"),
     # URL's import from message app
     path("", include("chandelier_events.apps.user.message.urls"))
 ]
