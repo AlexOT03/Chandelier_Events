@@ -18,7 +18,7 @@ class Service(models.Model):
 
 class ServiceDetail(models.Model):
     SIZES = (
-        (0, "Personalizado"),
+        (0, "Unico"),
         (1, "Pequeño"),
         (2, "Mediano"),
         (3, "Grande"),
@@ -26,7 +26,7 @@ class ServiceDetail(models.Model):
     
     service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='service_details')
     size = models.IntegerField(choices=SIZES)
-    price = models.DecimalField(decimal_places=2, max_digits=8)
+    price = models.DecimalField(decimal_places=2, max_digits=8, blank=True, null=True)
     duration = models.DurationField(blank=True, null=True)
 
     def __str__(self):

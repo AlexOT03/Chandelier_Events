@@ -22,13 +22,3 @@ $(document).ready(function() {
 });
 
 // -- Código JavaScript para activar el modal al cargar la página --
-// document.addEventListener("DOMContentLoaded", function() {
-//   $('#myModal').modal('show');
-// });
-// document.addEventListener("DOMContentLoaded", function() {
-//   var show_modal = document.body.getAttribute('data-show-modal');
-
-//   if (show_modal === 'true') {
-//       $('#myModal').modal('show');
-//   }
-// });

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.forms import formset_factory
@@ -87,23 +87,23 @@ class locationPageView(LoginRequiredMixin, View):
             'opening_hours': opening_hours,
             'images': images
         })
-    
+        
     def update(self, request, id, **kwargs):
-        location = Location.objects.get(id=id)
+        location = get_object_or_404(Location, id=id)
         location_opening_hours = OpeningHour.objects.filter(location=location)
         location_images = Image.objects.filter(location=location)
-        
+
         formset_hours = modelformset_factory(OpeningHour, extra=0, form=OpeningHoursForm)
         formset_images = modelformset_factory(Image, extra=0, form=ImagesForm)
-        
+
         if request.method == 'POST':
             form_location = LocationsForm(request.POST, instance=location)
-            form_hours = formset_hours(request.POST, queryset=location_opening_hours)
-            form_images = formset_images(request.POST, request.FILES, queryset=location_images)
-            
+            form_hours = formset_hours(request.POST, queryset=location_opening_hours, prefix='hours')
+            form_images = formset_images(request.POST, queryset=location_images, prefix='images')
+
             if form_location.is_valid() and form_hours.is_valid() and form_images.is_valid():
                 location = form_location.save()
-                
+
                 for form in form_hours:
                     hours = form.save(commit=False)
                     hours.location = location
@@ -114,13 +114,12 @@ class locationPageView(LoginRequiredMixin, View):
                     image.location = location
                     image.save()
 
-            return redirect('location_admin')
-            
-        else:
-            form_location = LocationsForm(instance=location)
-            form_hours = formset_hours(queryset=location_opening_hours)
-            form_images = formset_images(queryset=location_images)
-        
+                return redirect('location_admin')
+
+        form_location = LocationsForm(instance=location)
+        form_hours = formset_hours(queryset=location_opening_hours, prefix='hours')
+        form_images = formset_images(queryset=location_images, prefix='images')
+
         return render(request, 'location_admin_edit.html', {
             'form_location': form_location,
             'form_hours': form_hours,

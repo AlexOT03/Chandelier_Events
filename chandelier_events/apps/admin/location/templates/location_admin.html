@@ -13,51 +13,31 @@
     </nav>
 </div>
 <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h2>Nueva Ubicacion</h2>
-            </div>
-            <div class="card-body">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form_location|crispy }}
-                    <li class="dropdown-divider"></li>
-                    <label for="images"><h6><strong>Imagenes</strong></h6></label>
-                    <div class="scrollview-wrapper-x mb-3" id="images">
-                        {{ form_images.management_form }}
-                        {% for form_image in form_images %}
-                            <div class="scrollview-item-md">
-                                {{ form_image|crispy }}
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <li class="dropdown-divider"></li>
-                    <label for="open-hours"><h6><strong>Horario</strong></h6></label>
-                    <div class="scrollview-wrapper-x mb-3" id="open-hours">
-                        {{ form_hours.management_form }}
-                        {% for form_hour in form_hours %}
-                            <div class="scrollview-item-sm">
-                                {{ form_hour|crispy }}
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        Registrar
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+    <div class="col">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h2>Ubicaciones</h2>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <div class="search p-2">
-                        <input type="search" class="form-control me-2" name="buscador" id="buscador" placeholder="Buscar..">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="p-2">
+                            <label>
+                                Mostrar 
+                                <select class="datatable-selector">
+                                    <option value="1">1</option>
+                                    <option value="5" selected="">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="25">25</option>
+                                </select> 
+                                Entradas
+                            </label>
+                        </div>
+                        <div class="search p-2">
+                            <input type="search" class="form-control me-2" name="buscador" id="buscador" placeholder="Buscar..">
+                        </div>
                     </div>
                     <table class="table table-hover" cellspacing="0">
                         <thead>
@@ -134,6 +114,50 @@
                         </tbody>
                     </table>
                 </div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination" id="paginationButtons">
+                        <!-- Los botones de paginación se generarán aquí -->
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h2>Nueva Ubicacion</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form_location|crispy }}
+                    <li class="dropdown-divider"></li>
+                    <label for="images"><h6><strong>Imagenes</strong></h6></label>
+                    <div class="scrollview-wrapper-x mb-3" id="images">
+                        {{ form_images.management_form }}
+                        {% for form_image in form_images %}
+                            <div class="scrollview-item-md">
+                                {{ form_image|crispy }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <!-- <input type="button" value="add" id="add-form"> -->
+                    <li class="dropdown-divider"></li>
+                    <label for="open-hours"><h6><strong>Horario</strong></h6></label>
+                    <div class="scrollview-wrapper-x mb-3" id="open-hours">
+                        {{ form_hours.management_form }}
+                        {% for form_hour in form_hours %}
+                            <div class="scrollview-item-sm">
+                                {{ form_hour|crispy }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Registrar
+                    </button>
+                </form>
             </div>
         </div>
     </div>

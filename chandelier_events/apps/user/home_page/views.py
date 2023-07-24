@@ -10,7 +10,7 @@ from chandelier_events.apps.admin.theme.models import Theme
 # Create your views here.
 class homePageView(View):
     def get(self, request, **kwargs):
-        states = State.objects.all().filter(is_active=True)
+        states = State.objects.all().filter(is_active=True).order_by('name')
         themes = Theme.objects.all().filter(is_active=True)
         services = Service.objects.all().filter(is_active=True)
         locations = Location.objects.all().filter(is_active=True, state__in = states, theme__in=themes)
@@ -27,19 +27,20 @@ class homePageView(View):
         return render(request, 'index.html', {
             'states': states,
             'locations': locations,
-            'services': services
+            'services': services,
         })
     
 class quotePageView(View):
     def get(self, request, size, id, **kwargs):
         service_ids = [0]
+        form_quote = QuotesForm()
         if id != 0:
             location = Location.objects.get(id=id)
             service_ids.append(location.size)
+            form_quote.fields['theme'].initial = location.theme
         else:
             service_ids.append(size)
             
-        form_quote = QuotesForm()
         service_active = Service.objects.filter(is_active=True)
         form_quote.fields['service_detail'].queryset = ServiceDetail.objects.filter(size__in=service_ids, service__in=service_active)
         

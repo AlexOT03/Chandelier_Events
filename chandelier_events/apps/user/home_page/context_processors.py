@@ -6,5 +6,5 @@ def themes(request):
     return {'themes': themes}
 
 def states(request):
-    states = State.objects.all()
+    states = State.objects.all().order_by('name')
     return {'states': states}

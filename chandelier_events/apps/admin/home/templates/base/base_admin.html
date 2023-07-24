@@ -154,7 +154,7 @@
                               aria-labelledby="messagesDropdown">
                                 <h6 class="dropdown-header">Centro de mensajes</h6>
                                 {% for message in messages %}
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <a class="dropdown-item d-flex align-items-center" href="{% url 'messageInfo_admin' message.id %}">
                                         <div class="dropdown-list-image mr-3">
                                             <img class="rounded-circle" src="{% static 'img/user/logo-user.png' %}" alt="..." />
                                         </div>

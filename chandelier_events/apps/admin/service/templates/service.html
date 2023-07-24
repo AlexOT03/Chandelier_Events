@@ -20,8 +20,24 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <div class="search p-2">
-                        <input type="text" class="form-control me-2" name="buscador" id="buscador" placeholder="Buscar..">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="p-2">
+                            <label>
+                                Mostrar 
+                                <select class="datatable-selector">
+                                    <option value="1">1</option>
+                                    <option value="5" selected="">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="25">25</option>
+                                </select> 
+                                Entradas
+                            </label>
+                        </div>
+                        <div class="search p-2">
+                            <input type="search" class="form-control me-2" name="buscador" id="buscador" placeholder="Buscar..">
+                        </div>
                     </div>
                     <table class="table table-hover" cellspacing="0">
                         <thead>
@@ -98,6 +114,11 @@
                         </tbody>
                     </table>
                 </div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination" id="paginationButtons">
+                        <!-- Los botones de paginación se generarán aquí -->
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
@@ -113,11 +134,17 @@
                     {% csrf_token %}
                     {{ form_service|crispy }}
 
-                    <label for="details"><h6><strong>Detalles</strong></h6></label>
+                    <label for="details">
+                        <h6><b>Detalles</b></h6>
+                    </label>
+                    <div class="">
+                        <small class="mt-0 text-info"><i class="fa-solid fa-circle-info"></i> Debe completar el primer formulario en todos los casos. Los demás formularios solo son necesarios si el tamaño que escoge es distinto de <b><i>"único"</i></b>.</small>
+                    </div>
                     <div class="scrollview-wrapper-x mb-3" id="details">
                         {{ form_service_details.management_form }}
                         {% for form_details in form_service_details %}
-                            <div class="scrollview-item-md">
+                            <div class="scrollview-item-lg">
+                                <br>
                                 {{ form_details|crispy }}
                             </div>
                         {% endfor %}

@@ -7,8 +7,8 @@
 <div class="row">
     <nav aria-label="breadcrumb" class="ml-3">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Tablero</a></li>
-            <li class="breadcrumb-item"><a href="#">Mensajes</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'home_admin' %}">Tablero</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'message_admin' %}">Mensajes</a></li>
             <li class="breadcrumb-item active" aria-current="page">Detalles</li>
         </ol>
     </nav>
@@ -18,11 +18,14 @@
                 <h2>Detalles del Mensaje</h2>
             </div>
             <div class="card-body">
-                <label for="asunto"><strong>Asunto:</strong></label>
-                <p id="asunto" class="border p-2">{{ message.affair }}</p>
-        
                 <label for="usuario"><strong>Remitente:</strong></label>
                 <p id="usuario" class="border p-2">{{ message.name }}</p>
+                
+                <label for="correo"><strong>Fecha:</strong></label>
+                <p id="correo" class="border p-2">{{ message.date }}</p>
+
+                <label for="asunto"><strong>Asunto:</strong></label>
+                <p id="asunto" class="border p-2">{{ message.affair }}</p>
         
                 <label for="mensaje"><strong>Mensaje:</strong></label>
                 <p id="mensaje" class="border p-2">{{ message.message }}</p>
@@ -32,9 +35,6 @@
 
                 <label for="correo"><strong>Telefono:</strong></label>
                 <p id="correo" class="border p-2">{{ message.phone }}</p>
-
-                <label for="correo"><strong>Fecha:</strong></label>
-                <p id="correo" class="border p-2">{{ message.date }}</p>
             </div>
             <div class="card-footer">
                 <a href="{% url 'home_admin' %}" class="btn btn-secondary btn-icon-split">

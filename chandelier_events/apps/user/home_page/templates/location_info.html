@@ -12,7 +12,7 @@
             <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
                 <div class="card shadow">
                     <div class="card-body">
-                        <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
+                        <div id="carouselExampleRide" class="carousel slide carousel-fade" data-bs-ride="true">
                             <div class="carousel-inner">
                               {% for image in images %}
                                 {% if image.image %}
@@ -98,7 +98,7 @@
                             </div>
                             <div class="col p-4">
                                 <i class="fa-solid fa-crop fa-xl text-info"></i>&nbsp; 
-                                <span data-bs-toggle="tooltip" data-bs-title="Esta es una recomendacion generada por el dueño, no obstante puede ser omitida.">Para eventos {{ location.get_size_display }}s</span>
+                                Para eventos {{ location.get_size_display }}s
                             </div>
                             <div class="col p-4">
                                 <i class="fa-solid fa-user fa-xl text-secondary-app"></i>&nbsp;

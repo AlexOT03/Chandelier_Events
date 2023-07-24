@@ -15,12 +15,15 @@
             <div class="col-12 col-md-5 d-none d-md-block text-center image-container">
                 <img src="{{ data_info.image.url}}" alt="">
             </div>
-       </div>
         </div>
     </div>
 </section>
 {% else %}
-<section class="section-header bg-primary pt-6 pb-4 text-white"></section>
+<section class="section-header bg-primary pt-6 pb-4 text-white">
+    <div class="bootstrap-big-icon d-none d-lg-block">
+        <img src="{% static 'img/logo/chandelier-512-logo.png' %}" alt="" width="700" height="622" class="d-block my-1 colored-image-white">
+    </div>
+</section>
 {% endif %}
 
 <section class="section section-sm">
@@ -28,12 +31,12 @@
         <div class="row justify-content-center">
             {% if new_reference != "all" %}
                 <div class="col text-center">
-                    <h1 class="mb-3">Encuentra las localizaciones que te ofrecemos según tus criterios de búsqueda.</h1>
+                    <h2 class="mb-3">Encuentra las localizaciones que te ofrecemos según tus criterios de búsqueda.</h2>
                     <p>Filtrando ubicaciones por "{{ data_info.name }}"</p>
                 </div>
             {% else %}
                 <div class="col-12 col-md-8 text-center">
-                    <h1 class="display-2 mb-3">Explora las múltiples opciones de localización que te ofrece chandelier.</h1>
+                    <h2 class="display-2 mb-3">Explora las múltiples opciones de localización que te ofrece chandelier.</h2>
                     <p>Seleccione una para empezar!</p>
                 </div>
             {% endif %}
@@ -41,32 +44,41 @@
         <div class="row">
             <div class="album">
                 <div class="pt-4 pb-4">
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
-                        {% for location in locations %}
-                            <div class="col">
-                                <div class="card shadow-hover animate-up-1">
-                                    {% if location.image %}
-                                        <img src="{{ location.image.url }}" class="card-img-top rounded-top" alt="{{ location.image }}">
-                                    {% else %}
-                                        <p>No se encontro la imagen</p>
-                                    {% endif %}
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ location.name }}</h5>
-                                        <p class="card-subtitle">{{ location.location }}</p>
-                                        <div class="card-text">
-                                            <strong>Tematica</strong> | 
-                                            <small>{{ location.theme }}</small>
+                    {% if locations %}
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+                            {% for location in locations %}
+                                <div class="col">
+                                    <div class="card shadow-hover animate-up-1">
+                                        {% if location.image %}
+                                            <img src="{{ location.image.url }}" class="card-img-top rounded-top" alt="{{ location.image }}">
+                                        {% else %}
+                                            <p>No se encontro la imagen</p>
+                                        {% endif %}
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ location.name }}</h5>
+                                            <p class="card-subtitle">{{ location.location }}</p>
+                                            <div class="card-text">
+                                                <strong>Tematica</strong> | 
+                                                <small>{{ location.theme }}</small>
+                                            </div>
+                                            <p class="card-text">
+                                                <strong>$</strong> <small>{{ location.price }}</small> | <span
+                                                    class="fas fa-user-circle"></span> <small>{{ location.capacity }}</small>
+                                            </p>
+                                            <a href="{% url 'locationInfo_user' location.id %}" class="btn btn-primary animate-down-2">Mas informacion</a>
                                         </div>
-                                        <p class="card-text">
-                                            <strong>$</strong> <small>{{ location.price }}</small> | <span
-                                                class="fas fa-user-circle"></span> <small>{{ location.capacity }}</small>
-                                        </p>
-                                        <a href="{% url 'locationInfo_user' location.id %}" class="btn btn-primary animate-down-2">Mas informacion</a>
                                     </div>
                                 </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h1 class="display-2">¡Vaya, parece que no hay ningún lugar que coincida con tu búsqueda!</h1>
+                                <img src="{% static 'img/logo/chandelier-256-logo.png' %}" alt="Logo chandelier">
                             </div>
-                        {% endfor %}
-                    </div>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

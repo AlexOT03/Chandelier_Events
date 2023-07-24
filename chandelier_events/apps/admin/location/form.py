@@ -9,20 +9,20 @@ class LocationsForm(forms.ModelForm):
         model = Location
         fields = "__all__"
         labels = {
-            "name": _("Nombre"),
-            "owner": _("Dueño"),
+            "name": _("Nombre de la ubicacion"),
+            "owner": _("Nombre del dueño"),
             "location": _("Ubicacion"),
             "location_url": _("Mapa"),
             "length": _("Largo"),
             "width": _("Ancho"),
             "state": _("Estado"),
             "theme": _("Tematica"),
-            "capacity": _("Cupo"),
+            "capacity": _("Cupo Maximo"),
             "email": _("Correo"),
             "phone": _("Telefono"),
             "created_`date": _("Fecha de registro"),
             "updated_date": _("Fecha de actualizacion"),
-            "price": _("Precio"),
+            "price": _("Precio de renta"),
             "description": _("Descripción"),
             "web_site": _("Sitio web"),
             "is_active": _("Activo"),
@@ -61,8 +61,8 @@ class MyTimeInput(forms.widgets.TimeInput):
     input_type = 'time'
         
 class OpeningHoursForm(forms.ModelForm):
-    opening_time = forms.TimeField(widget=MyTimeInput())
-    closing_time = forms.TimeField(widget=MyTimeInput())
+    opening_time = forms.TimeField(widget=MyTimeInput(), label=_("Apertura"))
+    closing_time = forms.TimeField(widget=MyTimeInput(), label=_("Cierre"))
     
     class Meta:
         model = OpeningHour
@@ -70,6 +70,4 @@ class OpeningHoursForm(forms.ModelForm):
         labels = {
             "location": _("Ubicacion"),
             "day_of_week": _("Dia"),
-            "opening_time": _("Apertura"),
-            "closing_time": _("Cierre"),
         }

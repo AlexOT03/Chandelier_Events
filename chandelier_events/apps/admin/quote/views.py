@@ -27,20 +27,43 @@ def get_time(start, end):
     return hours
 
 class quotePageView(LoginRequiredMixin, View):
+    # def get(self, request, *args, **kwargs):
+    #     quotes = Quote.objects.all()
+    #     quotes_details = QuoteDetail.objects.all()
+
+    #     for quote in quotes:
+    #         for quote_detail in quotes_details:
+    #             if quote_detail.quote.id == quote.id:
+    #                 quote.is_on = True
+    #                 quote.on_date = quote_detail.update_date
+
+    #     return render(request, 'quote.html', {
+    #         'quotes': quotes,
+    #     })
     def get(self, request, *args, **kwargs):
         quotes = Quote.objects.all()
         quotes_details = QuoteDetail.objects.all()
-
+    
+        false_quotes = []
+        true_quotes = []
+    
         for quote in quotes:
             for quote_detail in quotes_details:
                 if quote_detail.quote.id == quote.id:
                     quote.is_on = True
                     quote.on_date = quote_detail.update_date
-
+    
+            if not hasattr(quote, 'is_on') or quote.is_on is False:
+                false_quotes.append(quote)
+            else:
+                true_quotes.append(quote)
+    
+        quotes = false_quotes + true_quotes
+    
         return render(request, 'quote.html', {
             'quotes': quotes,
-            'quotes_details': quotes_details,
         })
+
         
     def show(self, request, id, **kwargs):
         quote = Quote.objects.get(id=id)

@@ -21,8 +21,24 @@
             </div>
             <div class="container p-3">
                 <div class="table-responsive">
-                    <div class="search p-2">
-                        <input type="text" class="form-control me-2" name="buscador" id="buscador" placeholder="Buscar..">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="p-2">
+                            <label>
+                                Mostrar 
+                                <select class="datatable-selector">
+                                    <option value="1">1</option>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="25" selected="">25</option>
+                                </select> 
+                                Entradas
+                            </label>
+                        </div>
+                        <div class="search p-2">
+                            <input type="search" class="form-control me-2" name="buscador" id="buscador" placeholder="Buscar..">
+                        </div>
                     </div>
                     <table class="table table-hover">
                         <thead>
@@ -30,8 +46,9 @@
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
-                                <th>Cotizado</th>
+                                <th>Ubicacion</th>
                                 <th>Enviado</th>
+                                <th>Cotizado</th>
                                 <th colspan="2">Opciones</th>
                             </tr>
                         </thead>
@@ -40,8 +57,9 @@
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
-                                <th>Cotizado</th>
+                                <th>Ubicacion</th>
                                 <th>Enviado</th>
+                                <th>Cotizado</th>
                                 <th colspan="2">Opciones</th>
                             </tr>
                         </tfoot>
@@ -56,13 +74,20 @@
                                     <td>{{ quote.name }}</td>
                                     <td>{{ quote.last_name }}</td>
                                     <td>
-                                        {% if quote.is_on != True %}
-                                            No Cotizado
+                                        {% if quote.location != None %}
+                                        {{ quote.location }}
                                         {% else %}
-                                            {{ quote.on_date }}
+                                        <p class="">No especificada</p>
                                         {% endif %}
-                                    </td>                                    
-                                    <td>{{ quote.created_date|date:"d/m/y | H:i" }}</td>
+                                    </td>
+                                    <td>{{ quote.created_date|date:"d/m/y" }}</td>
+                                    <td>
+                                        {% if quote.is_on != True %}
+                                            <p class="text-danger">No Cotizado</p>
+                                        {% else %}
+                                            <p class="text-success">{{ quote.on_date|date:"d/m/y" }}</p>
+                                        {% endif %}
+                                    </td>
                                     <td><a href="{% url 'quoteInfo_admin' quote.id %}" class="btn btn-info"><i class="fa-solid fa-circle-info"></i></a></td>
                                     <td>
                                         <a class="btn btn-danger" data-toggle="modal" data-target="#alertModal{{ quote.id }}"><i class="fas fa-trash"></i></a>
@@ -95,6 +120,11 @@
                         </tbody>
                     </table>
                 </div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination" id="paginationButtons">
+                        <!-- Los botones de paginación se generarán aquí -->
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

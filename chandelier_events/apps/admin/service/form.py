@@ -48,3 +48,6 @@ class ServiceDetailsForm(forms.ModelForm):
             "duration": _("Duracion"),
             "size": _("Tamaño"),
         }
+        # help_texts = {
+        #     'size': _("si selecciona el tamaño unico no es necesario que rellene los otros formularios"),
+        # }

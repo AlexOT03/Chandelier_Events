@@ -36,12 +36,12 @@
                     Celebra momentos inolvidables con nosotros.
                 </h2>
                 <div class="d-flex justify-content-center align-items-center mb-5">
-                    <a href="#ca" class="btn btn-tertiary mb-3 mt-2 me-2 me-md-3 animate-up-2">
+                    <a href="#Categorias" class="btn btn-tertiary mb-3 mt-2 me-2 me-md-3 animate-up-2">
                         <span class="fa-solid fa-bell-concierge me-2"></span>
                         <span class="d-none d-md-inline">Explorar Categorias</span>
                         <span class="d-md-none">Categorias</span>
                     </a>
-                    <a href="#get-start" class="btn btn-tertiary mb-3 mt-2 me-2 me-md-3 animate-up-2">
+                    <a href="#Explorar" class="btn btn-tertiary mb-3 mt-2 me-2 me-md-3 animate-up-2">
                         <span class="fa-solid fa-location-dot me-2"></span>
                         <span class="d-none d-md-inline">Explorar Ubicaciones</span>
                         <span class="d-md-none">Ubicaciones</span>
@@ -58,7 +58,31 @@
     </figure>
 </section>
 
-<section class="section section-sm" id="get-start">
+<section class="section section-sm">
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 service-item">
+                    <h4 class="service-title">Cotizacion personalizada</h4>
+                    <p class="service-description">
+                        Con nuestro sitio web, puedes ingresar los detalles de tu evento, con esta informacion, se te
+                        proporcionará una cotización personalizada basada en los precios y servicios de los proveedores de
+                        lugares asociados.
+                    </p>
+                </div>
+                <div class="col-lg-6 col-md-6 service-item">
+                    <h4 class="service-title">Busqueda y visualizacion de lugares</h4>
+                    <p class="service-description">
+                        Minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                        aliquip ex ea commodo consequat tarad limino ata
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-sm" id="Explorar">
     <div class="container">
         <div class="row mb-4">
             <h2 class="">Ubicaciones para eventos por Estados</h2>
@@ -79,7 +103,7 @@
     </div>
 </section>
 
-<section class="section section-sm" id="ca">
+<section class="section section-sm" id="Categorias">
     <div class="container">
         <div class="row">
             <h2 class="text-center">¡Sumérgete en una experiencia única y participa en nuestros eventos online!</h2>
@@ -241,42 +265,23 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6 col-md-6 service-item">
-                <h4 class="service-title">Cotizacion personalizada</h4>
-                <p class="service-description">
-                    Con nuestro sitio web, puedes ingresar los detalles de tu evento, con esta informacion, se te
-                    proporcionará una cotización personalizada basada en los precios y servicios de los proveedores de
-                    lugares asociados.
-                </p>
-            </div>
-            <div class="col-lg-6 col-md-6 service-item">
-                <h4 class="service-title">Busqueda y visualizacion de lugares</h4>
-                <p class="service-description">
-                    Minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat tarad limino ata
-                </p>
-            </div>
-        </div>
-        <div class="row">
             {% for service in services %}
-                {% if forloop.counter <= 4 %}
-                    <div class="col-md-3 mb-2">
-                        <div class="custom-card-container">
-                            <div class="custom-card border">
-                                <div class="custom-front">
-                                    <img src="{{ service.image.url }}" alt="Image 1">
-                                    <div class="custom-text">
-                                        <h3 class="text_cursive">{{ service.name }}</h3>
-                                    </div>
+                <div class="col-md-3 mb-2">
+                    <div class="custom-card-container">
+                        <div class="custom-card border">
+                            <div class="custom-front">
+                                <img src="{{ service.image.url }}" alt="Image 1">
+                                <div class="custom-text">
+                                    <h3 class="text_cursive">{{ service.name }}</h3>
                                 </div>
-                                <div class="custom-back">
-                                    <h3>{{ service.name|title }}</h3>
-                                    <p>{{ service.description }}</p>
-                                </div>
+                            </div>
+                            <div class="custom-back">
+                                <h3>{{ service.name|title }}</h3>
+                                <p>{{ service.description|truncatewords:40 }}</p>
                             </div>
                         </div>
                     </div>
-                {% endif %}
+                </div>
             {% endfor %}
         </div>
     </div>
